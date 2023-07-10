@@ -18,15 +18,15 @@ class homeController extends Controller
     public function home(Request $r)
     {
 
-        $url = "https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyDqakaSzRssTN9CsKye9NEqEdk-Jfg33PU&placeid=ChIJf3osgOCEyDERFohUIY5TdKw";
-        // $url = 'https://mybusiness.googleapis.com/v4/accounts';
-        $ch = curl_init();
-        curl_setopt ($ch, CURLOPT_URL, $url);
-        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-        $result = curl_exec ($ch);
-        dd($result);
-        $res        = json_decode($result,true);
-        $reviews    = $res['result']['reviews'];
+        // $url = "https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyDqakaSzRssTN9CsKye9NEqEdk-Jfg33PU&placeid=ChIJf3osgOCEyDERFohUIY5TdKw";
+        // // $url = 'https://mybusiness.googleapis.com/v4/accounts';
+        // $ch = curl_init();
+        // curl_setopt ($ch, CURLOPT_URL, $url);
+        // curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+        // $result = curl_exec ($ch);
+        // dd($result);
+        // $res        = json_decode($result,true);
+        // $reviews    = $res['result']['reviews'];
 
         // lấy thông tin danh mục
         $data['categories'] = Category::getAllTour($r->lang);
