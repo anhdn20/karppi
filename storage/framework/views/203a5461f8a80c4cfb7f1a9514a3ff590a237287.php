@@ -5,8 +5,8 @@
     <title>Karppi</title>
     <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <link rel="shortcut icon" href="{{asset('uploads/')}}"/> --}}
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    
     <!-- Bootstrap CSS -->
 
     <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet" type="text/css" />
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/main.css')); ?>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- cdnjs -->
@@ -61,7 +61,7 @@
             </div>
         </div>
     </header>
-    @yield('content')
+    <?php echo $__env->yieldContent('content'); ?>
     <div class="boxgap">
 
     </div>
@@ -107,3 +107,4 @@
     </script>
   </body>
 </html>
+<?php /**PATH C:\laragon\www\karppi\resources\views/site/layout.blade.php ENDPATH**/ ?>

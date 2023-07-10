@@ -30,25 +30,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'locale'], function() {
-    Route::get('change-language/{language}', [homeController::class, 'changeLanguage'])->name('user.change-language');
 
-    route::get('/', [homeController::class, 'home']);
-    route::get('/tour/{slug}/{lang}', [tourController::class, 'index']);
-    route::get('/tours/{lang}', [tourController::class, 'list']);
-    route::get('/tours/{slug}/{lang}', [tourController::class, 'listByCate']);
-    route::get('/contact-us/{lang}', [homeController::class, 'contact']);
-    route::get('/review/{lang}', [homeController::class, 'review']);
-    route::get('/blogs/{lang}', [blogController::class, 'index']);
-    route::get('/blog/{slug}/{lang}', [blogController::class, 'detail']);
+route::get('/', [homeController::class, 'home']);
+route::get('/about-us', [homeController::class, 'about']);
+route::get('/menu', [homeController::class, 'menu']);
 
-    // =============================== search ================================
-    route::post('/search', [searchController::class, 'search']);
-    route::post('/search-result', [searchController::class, 'list'])->name('search-key');;
-
-    // send mail
-    Route::post('/send-mail', [homeController::class, 'sendMail']);
-});
 
 
 // up ảnh
