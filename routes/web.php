@@ -1,22 +1,15 @@
 <?php
 
-use App\Http\Controllers\admin\categoriesController;
-use App\Http\Controllers\admin\channelController;
 use App\Http\Controllers\admin\bannerController;
 use App\Http\Controllers\admin\blogController as AdminBlogController;
-use App\Http\Controllers\admin\seasonController;
-use App\Http\Controllers\admin\tagController;
-use App\Http\Controllers\admin\colorController;
+use App\Http\Controllers\admin\categoriesController;
+use App\Http\Controllers\admin\MenuController;
 use App\Http\Controllers\admin\reviewController;
 use App\Http\Controllers\admin\tourController as AdminTourController;
 use App\Http\Controllers\admin\userController;
-use App\Http\Controllers\searchController;
-use App\Http\Controllers\homeController;
 use App\Http\Controllers\adminController;
-use App\Http\Controllers\blogController;
 use App\Http\Controllers\dropZoneController;
-use App\Http\Controllers\tourController;
-use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\homeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +42,17 @@ Route::post('/loginAdmin', [adminController::class, 'login']);
 route::group(['middleware' => 'checkLogin'],function(){
     route::prefix('/cludmed/admin')->group(function(){
         route::get('/', [adminController::class, 'home']);
+
+        // =============================== Quản lí menu ================================
+        route::prefix('/menu-management')->group(function () {
+            route::get('/', [adminController::class, 'tour']);
+            route::post('/them', [AdminTourController::class, 'store']);
+            Route::post('/xoa', [AdminTourController::class, 'delete']);
+            Route::post('/xoa-anh', [AdminTourController::class, 'deleteGallery']);
+        });
+        Route::post('/data-tour', [MenuController::class, 'list']);
+        Route::post('/tour-detail', [AdminTourController::class, 'detail']);
+        // =============================== quản lí tour ================================
 
         // =============================== quản lí tour ================================
         route::prefix('/quan-li-tour')->group(function(){
