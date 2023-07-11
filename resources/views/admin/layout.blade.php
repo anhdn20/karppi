@@ -119,6 +119,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
+                <a href="{{ asset('/cludmed/admin/menu-management') }}" class="nav-link">
+                    <i class="nav-icon fas fa-sticky-note"></i>
+                    <p>
+                        Quản lí menu
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ asset('/cludmed/admin/quan-li-danh-muc-tour') }}" class="nav-link">
                     <i class="nav-icon fas fa-sticky-note"></i>
                     <p>

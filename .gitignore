@@ -13,6 +13,6 @@ npm-debug.log
 yarn-error.log
 
 /.vscode
-/storage
-.idea/
+storage
+.idea
 
