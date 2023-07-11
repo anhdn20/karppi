@@ -31,4 +31,9 @@ class homeController extends Controller
         return view('site.menu');
     }
 
+    public function gallery(Request $r)
+    {
+        return view('site.gallery');
+    }
+
 }

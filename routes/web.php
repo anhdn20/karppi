@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 
 route::get('/', [homeController::class, 'home']);
 route::get('/about-us', [homeController::class, 'about']);
+route::get('/gallery', [homeController::class, 'gallery']);
 route::get('/menu', [homeController::class, 'menu']);
 
 

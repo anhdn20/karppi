@@ -30,6 +30,7 @@
 
 html, body{
     overflow-x: hidden !important;
+    background-color: #dbdad6;
 }
 a{
     text-decoration: unset;
@@ -86,7 +87,7 @@ ul.social .fa-instagram{
 }
 section.menuno13{
     background: var(--bg-color);
-    min-height: 55vh;
+    min-height: 445px;
     text-align: center;
     padding-top: 100px;
     padding-bottom: 100px;
@@ -333,4 +334,43 @@ section.intro_3 p {
 section.banner_home.banner2{
     height: 850px;
     width: 100%;
+}
+
+.gallery_all > a{
+    width: calc(50% - 50px);
+    margin-bottom: 100px;
+}
+
+section.about{
+    margin-top: 50px;
+    text-align: center;
+}
+
+section.about > .container > .row{
+    justify-content: center;
+}
+
+section.about .map{
+    margin-top: 50px;
+}
+
+section.about iframe{
+    width: 100%;
+}
+
+section.about h3{
+    font-size: 23px;
+    font-family: auto;
+    color: var(--main-color);
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    margin-top: 27px;
+}
+
+section.about p {
+    font-family: ainslie;
+    font-size: 15px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    color: var(--main-color);
 }

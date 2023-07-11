@@ -5,14 +5,6 @@ $(document).ready(function () {
         $('.lazy').Lazy();
     });
 
-    // khởi chạy select 2
-    $('.select2').select2(
-        {
-            tags: true,
-            tokenSeparators: [',', ' ']
-        }
-    )
-
     // khởi tạo fancybox
     Fancybox.bind("[data-fancybox]", {
       // Toolbar: {

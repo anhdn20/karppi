@@ -21,7 +21,7 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
   </head>
   <body>
@@ -31,19 +31,21 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
                         <div class="logo">
-                            <img src="https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/762bda74-035d-4a6b-a3a3-4b38378e2287/Gustav_logo_valmis-19.png?format=1500w" alt="">
+                            <a href="{{asset('/')}}">
+                                <img src="https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/762bda74-035d-4a6b-a3a3-4b38378e2287/Gustav_logo_valmis-19.png?format=1500w" alt="">
+                            </a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <ul class="menu">
                             <li>
-                                <a href="#">MENU</a>
+                                <a href="{{asset('/menu')}}">MENU</a>
                             </li>
                             <li>
-                                <a href="#">GALLERY</a>
+                                <a href="{{asset('/gallery')}}">GALLERY</a>
                             </li>
                             <li>
-                                <a href="#">ABOUT US</a>
+                                <a href="{{asset('/about-us')}}">ABOUT US</a>
                             </li>
                         </ul>
                     </div>
@@ -102,6 +104,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js" integrity="sha512-nKZDK+ztK6Ug+2B6DZx+QtgeyAmo9YThZob8O3xgjqhw2IVQdAITFasl/jqbyDwclMkLXFOZRiytnUrXk/PM6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     <script>
         AOS.init();
     </script>
