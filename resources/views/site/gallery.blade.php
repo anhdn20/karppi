@@ -70,13 +70,21 @@
         //     margins : 50
         // });
         // init Masonry
-        var $grid = $('.gallery_all').masonry({
-            gutter: 100
+        var gutterT = 100;
+        if(screen.width <= 1024){
+            gutterT = 50;
+        }
+        if(screen.width <= 768){
+            gutterT = 10;
+        }
+
+        var $grid = $('.gallery_all').imagesLoaded( function() {
+        // init Masonry after all images have loaded
+            $grid.masonry({
+                gutter: gutterT
+            });
         });
-        // layout Masonry after each image loads
-        $grid.imagesLoaded().progress( function() {
-            $grid.masonry('layout');
-        });
+
     });
 </script>
 @endsection

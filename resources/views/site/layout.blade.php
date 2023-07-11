@@ -22,6 +22,8 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
 
   </head>
   <body>
@@ -61,6 +63,62 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mb">
+            <div class="head">
+                <div class="logo">
+                    <a href="{{asset('/')}}">
+                        <img src="https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/762bda74-035d-4a6b-a3a3-4b38378e2287/Gustav_logo_valmis-19.png?format=1500w" alt="">
+                    </a>
+                </div>
+            </div>
+            <input type="checkbox" id="burger-toggle" />
+            <label for="burger-toggle" class="burger-menu">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </label>
+            <div class="menu">
+                <div class="menu-inner">
+                    <ul class="menu-nav">
+                        <li class="menu-nav-item">
+                            <a class="menu-nav-link" href="#">
+                                <span>
+                                    <div>Home</div>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="menu-nav-item">
+                            <a class="menu-nav-link" href="#">
+                                <span>
+                                    <div>About</div>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="menu-nav-item">
+                            <a class="menu-nav-link" href="#">
+                                <span>
+                                    <div>Service</div>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="menu-nav-item">
+                            <a class="menu-nav-link" href="#">
+                                <span>
+                                    <div>Team</div>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="gallery">
+                        <div class="images">
+                            <a href="#" class="image-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="image-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </header>
     @yield('content')
