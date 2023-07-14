@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\bannerController;
+use App\Http\Controllers\admin\FoodController;
 use App\Http\Controllers\admin\blogController as AdminBlogController;
 use App\Http\Controllers\admin\categoriesController;
 use App\Http\Controllers\admin\MenuController;
@@ -43,9 +44,9 @@ route::group(['middleware' => 'checkLogin'],function(){
     route::prefix('/cludmed/admin')->group(function(){
         route::get('/', [adminController::class, 'home']);
 
-        // =============================== Quản lí menu ================================
-        route::prefix('/menu-management')->group(function () {
-            route::get('/', [adminController::class, 'tour']);
+        // =============================== Quản lí menu food ================================
+        route::prefix('/food')->group(function () {
+            route::get('/', [FoodController::class, 'listFood']);
             route::post('/them', [AdminTourController::class, 'store']);
             Route::post('/xoa', [AdminTourController::class, 'delete']);
             Route::post('/xoa-anh', [AdminTourController::class, 'deleteGallery']);
