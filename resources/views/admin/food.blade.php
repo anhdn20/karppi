@@ -8,7 +8,7 @@
     <x-headadmin title="Quản lí tour"></x-headadmin>
 
     @php
-        $field = ['TT','Tên','Danh mục','#'];
+        $field = ['TT','Tên','Mô tả','Giá' ,'Danh mục','#'];
     @endphp
 
     <x-table :field="$field"></x-table>
@@ -43,7 +43,7 @@
                                             <div class="row" id="form_tour">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Tên Tour</label>
+                                                        <label for="exampleInputEmail1">Tên Món ăn</label>
                                                         <input name="title_vi" class="form-control" id="title_vi" placeholder="Nhập tên tour" />
                                                     </div>
                                                 </div>
@@ -51,7 +51,7 @@
                                                     <div class="form-group">
                                                         <label>Danh mục</label>
                                                         <select class="form-control select2" name="categoryId" id="categoryId" style="width: 100%;">
-                                                            @foreach ($foods as $value)
+                                                            @foreach ($foodCategories as $value)
                                                             <option value="{{$value->id}}">{{$value->name}}</option>
                                                             @endforeach
                                                         </select>
@@ -59,198 +59,32 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Giá gốc</label>
+                                                        <label for="exampleInputEmail1">Giá</label>
                                                         <input name="price" type="number" class="form-control" value="0" id="price" placeholder="Nhập giá" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Giá sau khi giảm</label>
-                                                        <input name="pricefix" type="number" class="form-control" value="0" id="pricefix" placeholder="Nhập giá" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Tabs</label>
-                                                        <select class="form-control select2" name="tab" id="tab" style="width: 100%;">
-                                                            <option value="0">Lastest and News</option>
-                                                            @foreach ($tabs as $key => $value)
-                                                                <option value="{{$value->id}}">{{$value->title_vi}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Tag</label>
-                                                        <select class="form-control select2" name="tag" id="tag" style="width: 100%;">
-                                                            <option value="With Exclusive Space" selected>With Exclusive Space</option>
-                                                            <option value="Exclusive Collection">Exclusive Collection</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Video 1 (Link youtube)</label>
-                                                        <input name="video1" class="form-control" id="video1" placeholder="Nhập url" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Video 2 (Link youtube)</label>
-                                                        <input name="video2" class="form-control" id="video2" placeholder="Nhập url" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Video 360 (Link youtube)</label>
-                                                        <input name="video360" class="form-control" id="video360" placeholder="Nhập url" />
-                                                    </div>
-                                                </div>
+
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Mô tả ngắn</label>
                                                         <textarea name="sub_title_vi" class="form-control" id="sub_title_vi" placeholder="Nhập mô tả"></textarea>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung Tab "Mô tả"</label>
+
+                                                <div class="card-body" id="formupimage">
+                                                    <label for="">Ảnh đại diện chính</label>
+                                                    <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="fallback">
+                                                            <input name="file" type="file" id="image-upload1" multiple>
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>
+                                                            <h4>Thả tệp vào đây hoặc nhấp để tải lên. (Chỉ khi cần thêm hoặc thay đổi)</h4>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Tiêu đề</label>
-                                                        <input name="title_tab1_vi" class="form-control" id="title_tab1_vi" placeholder="Nhập url" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="des_tab1_vi" class="form-control" id="des_tab1_vi" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung Tab "chi tiết và giá"</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="des_tab2_vi" class="form-control" id="des_tab2_vi" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung Tab "hoạt động"</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="des_tab3_vi" class="form-control" id="des_tab3_vi" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung Tab "ghi chú"</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="des_tab4_vi" class="form-control" id="des_tab4_vi" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung phần "khuyến mãi"</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="offer_vi" class="form-control" id="offer_vi" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-                                            <div class="row" id="form_tour">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Tên Tour</label>
-                                                        <input name="title_en" class="form-control" id="title_en" placeholder="Nhập tên tour">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="sub_title_en" class="form-control" id="sub_title_en" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung Tab "Mô tả"</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Tiêu đề</label>
-                                                        <input name="title_tab1_en" class="form-control" id="title_tab1_en" placeholder="Nhập url">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="des_tab1_en" class="form-control" id="des_tab1_en" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung Tab "chi tiết và giá"</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="des_tab2_en" class="form-control" id="des_tab2_en" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung Tab "hoạt động"</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="des_tab3_en" class="form-control" id="des_tab3_en" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung Tab "ghi chú"</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="des_tab4_en" class="form-control" id="des_tab4_en" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-5">
-                                                <div class="col-md-12">
-                                                    <label for="">Nội dung phần "khuyến mãi"</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="offer_en" class="form-control" id="offer_en" placeholder="Nhập mô tả"></textarea>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -260,87 +94,6 @@
                             <input type="hidden" name="action" id="action" value="create">
                         </div>
                     </form>
-                    <div class="modal-body">
-                        <div class="card-body" id="formupimage">
-                            <label for="">Ảnh đại diện chính</label>
-                            <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload" enctype="multipart/form-data">
-                                @csrf
-                                <div class="fallback">
-                                    <input name="file" type="file" id="image-upload1" multiple>
-                                </div>
-                                <div class="dz-message needsclick">
-                                    <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>
-                                    <h4>Thả tệp vào đây hoặc nhấp để tải lên. (Chỉ khi cần thêm hoặc thay đổi)</h4>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-body" id="formupimage1">
-                            <label for="">Ảnh đại diện tab mô tả</label>
-                            <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload1" enctype="multipart/form-data">
-                                @csrf
-                                <div class="fallback">
-                                    <input name="file" type="file" id="image-upload1_1" multiple>
-                                </div>
-                                <div class="dz-message needsclick">
-                                    <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>
-                                    <h4>Thả tệp vào đây hoặc nhấp để tải lên. (Chỉ khi cần thêm hoặc thay đổi)</h4>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-body" id="formupimage2">
-                            <label for="">Ảnh phần khuyến mãi</label>
-                            <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload2" enctype="multipart/form-data">
-                                @csrf
-                                <div class="fallback">
-                                    <input name="file" type="file" id="image-upload1_2" multiple>
-                                </div>
-                                <div class="dz-message needsclick">
-                                    <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>
-                                    <h4>Thả tệp vào đây hoặc nhấp để tải lên. (Chỉ khi cần thêm hoặc thay đổi)</h4>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-body" id="formupimage3">
-                            <label for="">Tệp tài liệu (PDF)</label>
-                            <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload3" enctype="multipart/form-data">
-                                @csrf
-                                <div class="fallback">
-                                    <input name="file" type="file" id="image-upload1_3" multiple>
-                                </div>
-                                <div class="dz-message needsclick">
-                                    <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>
-                                    <h4>Thả tệp vào đây hoặc nhấp để tải lên. (Chỉ khi cần thêm hoặc thay đổi)</h4>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-body" id="formupimage4">
-                            <label for="">Gallery tour</label>
-                            <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload4" enctype="multipart/form-data">
-                                @csrf
-                                <div class="fallback">
-                                    <input name="file" type="file" id="image-upload1_4" multiple>
-                                </div>
-                                <div class="dz-message needsclick">
-                                    <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>
-                                    <h4>Thả tệp vào đây hoặc nhấp để tải lên. (Chỉ khi cần thêm hoặc thay đổi)</h4>
-                                </div>
-                            </form>
-                            <div class="row mt-2">
-                                <div class="col-md-12">
-                                    <label for="">Danh sách ảnh gallery</label>
-                                    <div class="box_gallery">
-                                        <div class="item">
-                                            <div class="icon_del">
-                                                <i class="fas fa-times"></i>
-                                            </div>
-                                            <img src="" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                         <button type="submit" class="btn btn-primary" id="insertData">Lưu</button>
@@ -369,102 +122,18 @@
         var FileArr2 = [];
         var FileArr3 = [];
         var FileArr4 = [];
-        Dropzone.autoDiscover = false;
-
-        var myDropzone = new Dropzone("#image-upload", {
-            maxFilesize: 3,
-            maxFiles: 1,
-            acceptedFiles: ".jpeg,.jpg,.png,.webp",
-            addRemoveLinks: true,
-            success: function(file, response){
-                FileArr.push(response);
-
-                setSuccessUpload(file.previewElement.children[4]);
-
-            },
-            removedfile: function(file) {
-                var _ref;
-                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-            }
-        });
-
-        var myDropzone = new Dropzone("#image-upload1", {
-            maxFilesize: 3,
-            maxFiles: 1,
-            acceptedFiles: ".jpeg,.jpg,.png,.webp",
-            addRemoveLinks: true,
-            success: function(file, response){
-                FileArr1.push(response);
-
-                setSuccessUpload(file.previewElement.children[4]);
-
-            },
-            removedfile: function(file) {
-                var _ref;
-                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-            }
-        });
-
-        var myDropzone = new Dropzone("#image-upload2", {
-            maxFilesize: 3,
-            maxFiles: 1,
-            acceptedFiles: ".jpeg,.jpg,.png,.webp",
-            addRemoveLinks: true,
-            success: function(file, response){
-                FileArr2.push(response);
-
-                setSuccessUpload(file.previewElement.children[4]);
-
-            },
-            removedfile: function(file) {
-                var _ref;
-                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-            }
-        });
-
-        var myDropzone = new Dropzone("#image-upload3", {
-            maxFilesize: 3,
-            maxFiles: 1,
-            acceptedFiles: ".pdf",
-            addRemoveLinks: true,
-            success: function(file, response){
-                FileArr3.push(response);
-
-                setSuccessUpload(file.previewElement.children[4]);
-
-            },
-            removedfile: function(file) {
-                var _ref;
-                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-            }
-        });
-
-        var myDropzone = new Dropzone("#image-upload4", {
-            maxFilesize: 3,
-            maxFiles: 40,
-            acceptedFiles: ".jpeg,.jpg,.png,.webp",
-            addRemoveLinks: true,
-            success: function(file, response){
-                FileArr4.push(response);
-
-                setSuccessUpload(file.previewElement.children[4]);
-
-            },
-            removedfile: function(file) {
-                var _ref;
-                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-            }
-        });
 
         $(document).ready(function() {
             // tải dữ liệu lúc mới vào trang
             let DataLoadFirst = [
                 {data: 'id', name: 'Thứ tự'},
                 {data: 'name', name: 'Tên'},
-                {data: 'category_id', name: 'Danh mục'},
+                {data: 'description', name: 'Mô tả'},
+                {data: 'price', name: 'Giá'},
+                {data: 'category_name', name: 'Danh mục'},
                 {data: 'action', name: 'Hành Động'}
             ];
-            load_data_ajax_datatables("{{ url('/cludmed/admin/data-tour') }}",DataLoadFirst);
+            load_data_ajax_datatables("{{ url('/cludmed/admin/data-food') }}",DataLoadFirst);
 
             //insert
             $('#insertData').click(function (e) {

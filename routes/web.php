@@ -8,7 +8,7 @@ use App\Http\Controllers\admin\MenuController;
 use App\Http\Controllers\admin\reviewController;
 use App\Http\Controllers\admin\tourController as AdminTourController;
 use App\Http\Controllers\admin\userController;
-use App\Http\Controllers\adminController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\dropZoneController;
 use App\Http\Controllers\homeController;
 use Illuminate\Support\Facades\Route;
@@ -39,25 +39,24 @@ Route::post('/dropzonedel', [dropZoneController::class, 'dropzoneDel']);
 
 
 // trang quản lí
-Route::post('/loginAdmin', [adminController::class, 'login']);
+Route::post('/loginAdmin', [AdminController::class, 'login']);
 route::group(['middleware' => 'checkLogin'],function(){
     route::prefix('/cludmed/admin')->group(function(){
-        route::get('/', [adminController::class, 'home']);
+        route::get('/', [AdminController::class, 'home']);
 
         // =============================== Quản lí menu food ================================
         route::prefix('/food')->group(function () {
-            route::get('/', [FoodController::class, 'listFood']);
-            route::post('/them', [AdminTourController::class, 'store']);
-            Route::post('/xoa', [AdminTourController::class, 'delete']);
-            Route::post('/xoa-anh', [AdminTourController::class, 'deleteGallery']);
+            route::get('/', [AdminController::class, 'food']);
+            route::post('/create', [FoodController::class, 'create']);
+            Route::post('/delete', [FoodController::class, 'delete']);
         });
-        Route::post('/data-tour', [MenuController::class, 'list']);
+        Route::post('/data-food', [FoodController::class, 'list']);
         Route::post('/tour-detail', [AdminTourController::class, 'detail']);
         // =============================== quản lí tour ================================
 
         // =============================== quản lí tour ================================
         route::prefix('/quan-li-tour')->group(function(){
-            route::get('/', [adminController::class, 'tour']);
+            route::get('/', [AdminController::class, 'tour']);
             route::post('/them', [AdminTourController::class, 'store']);
             Route::post('/xoa', [AdminTourController::class, 'delete']);
             Route::post('/xoa-anh', [AdminTourController::class, 'deleteGallery']);
@@ -69,7 +68,7 @@ route::group(['middleware' => 'checkLogin'],function(){
 
         // =============================== quản lí user ================================
         route::prefix('/quan-li-nguoi-dung')->group(function(){
-            route::get('/', [adminController::class, 'user']);
+            route::get('/', [AdminController::class, 'user']);
             route::post('/them', [userController::class, 'store']);
             Route::post('/xoa', [userController::class, 'delete']);
         });
@@ -81,7 +80,7 @@ route::group(['middleware' => 'checkLogin'],function(){
 
         // =============================== quản lí danh mục ================================
         route::prefix('/quan-li-danh-muc-blog')->group(function(){
-            route::get('/', [adminController::class, 'categoryBlog']);
+            route::get('/', [AdminController::class, 'categoryBlog']);
             route::post('/them', [categoriesController::class, 'store']);
             Route::post('/xoa', [categoriesController::class, 'delete']);
         });
@@ -91,7 +90,7 @@ route::group(['middleware' => 'checkLogin'],function(){
 
         // =============================== quản lí danh mục ================================
         route::prefix('/quan-li-danh-muc-tour')->group(function(){
-            route::get('/', [adminController::class, 'categoryTour']);
+            route::get('/', [AdminController::class, 'categoryTour']);
             route::post('/them', [categoriesController::class, 'store']);
             Route::post('/xoa', [categoriesController::class, 'delete']);
         });
@@ -102,7 +101,7 @@ route::group(['middleware' => 'checkLogin'],function(){
 
         // =============================== quản lí banner ================================
         route::prefix('/quan-li-hinh-anh')->group(function(){
-            route::get('/', [adminController::class, 'banner']);
+            route::get('/', [AdminController::class, 'banner']);
             route::post('/them', [bannerController::class, 'store']);
             Route::post('/xoa', [bannerController::class, 'delete']);
         });
@@ -113,7 +112,7 @@ route::group(['middleware' => 'checkLogin'],function(){
 
         // =============================== quản lí đánh giá ================================
         route::prefix('/quan-li-review')->group(function(){
-            route::get('/', [adminController::class, 'review']);
+            route::get('/', [AdminController::class, 'review']);
             route::post('/them', [reviewController::class, 'store']);
             Route::post('/xoa', [reviewController::class, 'delete']);
             Route::post('/xoa-anh', [reviewController::class, 'deleteGallery']);
@@ -125,7 +124,7 @@ route::group(['middleware' => 'checkLogin'],function(){
 
         // =============================== quản lí studio ================================
         route::prefix('/quan-li-blog')->group(function(){
-            route::get('/', [adminController::class, 'blog']);
+            route::get('/', [AdminController::class, 'blog']);
             route::post('/them', [AdminBlogController::class, 'store']);
             Route::post('/xoa', [AdminBlogController::class, 'delete']);
         });

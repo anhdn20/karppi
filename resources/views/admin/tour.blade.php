@@ -554,7 +554,6 @@
                             let tour = data.detail;
 
                             // set dữ liệu tour
-                            $('#title_vi').val(tour.title_vi);
                             $('#title_en').val(tour.title_en);
                             $('#sub_title_vi').val(tour.sub_title_vi);
                             $('#sub_title_en').val(tour.sub_title_en);

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\FoodCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class adminController extends Controller{
+class AdminController extends Controller{
 
     public function login(Request $r){
         // lấy thông tin email để kiểm tra password
@@ -36,6 +37,13 @@ class adminController extends Controller{
     }
     public function season(){
         return view('admin.season');
+    }
+
+    public function food()
+    {
+        $foodCategories = FoodCategory::select('id', 'name')->where('is_deleted', 0)->get();
+
+        return view('admin.food',compact('foodCategories'));
     }
     public function tour(){
         $categories = Category::where('type', 0)->where('is_deleted', 0)->get();
