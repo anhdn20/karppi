@@ -130,7 +130,7 @@
                 {data: 'category_name', name: 'Danh mục'},
                 {data: 'action', name: 'Hành Động'}
             ];
-            load_data_ajax_datatables("{{ url('/cludmed/admin/data-food') }}",DataLoadFirst);
+            load_data_ajax_datatables("{{ url('/karppi/admin/data-food') }}",DataLoadFirst);
 
             //insert
             $('#insertData').click(function (e) {
@@ -155,7 +155,7 @@
                 dataForm += '&image2=' + image2;
                 dataForm += '&pdf=' + pdf;
                 dataForm += '&gallery=' + gallery;
-                var url = '{{url("/cludmed/admin/food/create")}}';
+                var url = '{{url("/karppi/admin/food/create")}}';
                 insert(url,dataForm);
             })
 
@@ -163,7 +163,7 @@
             $(document).on('click','.del',function (e){
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = '{{url("/cludmed/admin/quan-li-tour/xoa")}}';
+                var url = '{{url("/karppi/admin/quan-li-tour/xoa")}}';
                 del(url,id);
             })
 
@@ -172,7 +172,7 @@
                 e.preventDefault();
                 var id = $(this).data('id');
                 console.log(id);
-                var url = '{{url("/cludmed/admin/quan-li-tour/xoa-anh")}}';
+                var url = '{{url("/karppi/admin/quan-li-tour/xoa-anh")}}';
                 delGallery(url,id, $(this));
             })
 
@@ -201,7 +201,7 @@
             $(document).on('click','.update',async function (e){
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = '{{url("/cludmed/admin/tour-detail")}}';
+                var url = '{{url("/karppi/admin/tour-detail")}}';
                 // thông báo chờ
                 Show_wait_announce();
                 await $.ajax({

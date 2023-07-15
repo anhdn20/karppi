@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{asset('uploads/Logo_WoLico_Symbol.png')}}"/>
-    <title>cludmed - Trang quản lý</title>
+    <title>karppi - Trang quản lý</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
@@ -86,9 +86,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ asset('/cludmed/admin') }}" class="brand-link">
+    <a href="{{ asset('/karppi/admin') }}" class="brand-link">
       <img src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">cludmed</span>
+      <span class="brand-text font-weight-light">karppi</span>
     </a>
 
     <!-- Sidebar -->
@@ -99,7 +99,7 @@
           <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">cludmed adminer</a>
+          <a href="#" class="d-block">karppi adminer</a>
         </div>
       </div>
 
@@ -119,7 +119,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ asset('/cludmed/admin/food') }}" class="nav-link">
+                <a href="{{ asset('/karppi/admin/food') }}" class="nav-link">
                     <i class="nav-icon fas fa-sticky-note"></i>
                     <p>
                         Food
@@ -127,7 +127,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ asset('/cludmed/admin/quan-li-danh-muc-tour') }}" class="nav-link">
+                <a href="{{ asset('/karppi/admin/quan-li-danh-muc-tour') }}" class="nav-link">
                     <i class="nav-icon fas fa-sticky-note"></i>
                     <p>
                         Quản lí danh mục tour
@@ -135,7 +135,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ asset('/cludmed/admin/quan-li-tour') }}" class="nav-link">
+                <a href="{{ asset('/karppi/admin/quan-li-tour') }}" class="nav-link">
                     <i class="nav-icon fas fa-file-alt"></i>
                     <p>
                         Quản lí tour
@@ -143,7 +143,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ asset('/cludmed/admin/quan-li-danh-muc-blog') }}" class="nav-link">
+                <a href="{{ asset('/karppi/admin/quan-li-danh-muc-blog') }}" class="nav-link">
                     <i class="nav-icon fas fa-sticky-note"></i>
                     <p>
                         Quản lí danh mục blog
@@ -151,7 +151,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ asset('/cludmed/admin/quan-li-blog') }}" class="nav-link">
+                <a href="{{ asset('/karppi/admin/quan-li-blog') }}" class="nav-link">
                     <i class="nav-icon fas fa-video"></i>
                     <p>
                         Quản lí blog
@@ -159,7 +159,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ asset('/cludmed/admin/quan-li-hinh-anh') }}" class="nav-link">
+                <a href="{{ asset('/karppi/admin/quan-li-hinh-anh') }}" class="nav-link">
                     <i class="nav-icon fas fa-file-video"></i>
                     <p>
                         Quản lí hình ảnh
@@ -167,10 +167,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ asset('/cludmed/admin/quan-li-review') }}" class="nav-link">
+                <a href="{{ asset('/karppi/admin/gallery') }}" class="nav-link">
                     <i class="nav-icon fas fa-envelope-open-text"></i>
                     <p>
-                        Quản lí review
+                        Quản lí Gallery
                     </p>
                 </a>
             </li>

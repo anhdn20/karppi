@@ -42,7 +42,7 @@ Route::post('/dropzonedel', [dropZoneController::class, 'dropzoneDel']);
 // trang quản lí
 Route::post('/loginAdmin', [AdminController::class, 'login']);
 route::group(['middleware' => 'checkLogin'],function(){
-    route::prefix('/cludmed/admin')->group(function(){
+    route::prefix('/karppi/admin')->group(function(){
         route::get('/', [AdminController::class, 'home']);
 
         // =============================== Quản lí menu food ================================
