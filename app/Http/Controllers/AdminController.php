@@ -20,14 +20,14 @@ class AdminController extends Controller{
         }
 
         // ko đúng mật khẩu thì về login
-        if(md5($params['password']) != $detail->password || $detail->role != 1){
+        if(md5($params['password']) != $detail->password){
             return redirect()->back()->with('status','Thông tin đăng nhập không chính xác');
         }
 
         // lưu thông tin session
         $r->session()->put('user_id',$detail->id);
 
-        return redirect('/cludmed/admin');
+        return redirect('/karppi/admin');
 
 
     }
