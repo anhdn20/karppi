@@ -6,6 +6,8 @@ use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use App\Models\FoodCategory;
+use App\Models\FoodMenu;
 use App\Models\Image;
 use App\Models\review;
 use App\Models\Tour;
@@ -28,7 +30,15 @@ class homeController extends Controller
 
     public function menu(Request $r)
     {
-        return view('site.menu');
+
+        // lấy food menu hiện tại
+        $currentMenu = FoodMenu::where('is_active',1)->first();
+
+        // lấy danh mục thực đơn theo danh mục hiện tại
+        // $categoryByCurrentMenu = FoodCategory::
+
+
+        return view('site.menu',compact('currentMenu'));
     }
 
     public function gallery(Request $r)

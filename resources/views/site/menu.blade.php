@@ -1,17 +1,19 @@
 @extends('site.layout')
 @section('content')
 
-<section class="menuno13">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>MENU NO.13</h2>
-                <p class="description">“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD <br> AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”</p>
-                <span class="owner">- GUSTAV</span>
+@if ($currentMenu != null)
+    <section class="menuno13">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>{{$currentMenu->name}}</h2>
+                    <p class="description">{{$currentMenu->description}}</p>
+                    <span class="owner">- GUSTAV</span>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 
 <section class="banner">
     <div class="banner">

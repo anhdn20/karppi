@@ -69,27 +69,12 @@ class AdminController extends Controller{
         return view('admin.category_blog', compact('categories'));
     }
 
-    public function channel(){
-        return view('admin.channel');
-    }
-
     public function banner(){
         return view('admin.banner');
     }
 
-    public function actor(){
-        return view('admin.actor');
-    }
-
-    public function color(){
-        return view('admin.color');
-    }
-
-    public function tag(){
-        return view('admin.tag');
-    }
-    public function review(){
-        return view('admin.review');
+    public function gallery(){
+        return view('admin.gallery');
     }
 
 

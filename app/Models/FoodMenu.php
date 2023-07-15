@@ -9,7 +9,7 @@ class FoodMenu extends Model
     protected $table = 'food_menu';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name', 'description', 'is_deleted', 'image_url'
+        'name', 'description', 'is_active', 'is_deleted', 'image_url'
     ];
 
 

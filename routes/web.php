@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\bannerController;
 use App\Http\Controllers\admin\FoodController;
 use App\Http\Controllers\admin\blogController as AdminBlogController;
 use App\Http\Controllers\admin\categoriesController;
+use App\Http\Controllers\admin\galleryController;
 use App\Http\Controllers\admin\MenuController;
 use App\Http\Controllers\admin\reviewController;
 use App\Http\Controllers\admin\tourController as AdminTourController;
@@ -111,14 +112,13 @@ route::group(['middleware' => 'checkLogin'],function(){
 
 
         // =============================== quản lí đánh giá ================================
-        route::prefix('/quan-li-review')->group(function(){
-            route::get('/', [AdminController::class, 'review']);
-            route::post('/them', [reviewController::class, 'store']);
-            Route::post('/xoa', [reviewController::class, 'delete']);
-            Route::post('/xoa-anh', [reviewController::class, 'deleteGallery']);
+        route::prefix('/gallery')->group(function(){
+            route::get('/', [AdminController::class, 'gallery']);
+            route::post('/them', [galleryController::class, 'store']);
+            Route::post('/xoa', [galleryController::class, 'delete']);
         });
-        Route::post('/data-review', [reviewController::class, 'list']);
-        Route::post('/review-detail', [reviewController::class, 'detail']);
+        Route::post('/data-gallery', [galleryController::class, 'list']);
+        Route::post('/gallery-detail', [galleryController::class, 'detail']);
         // =============================== quản lí đánh giá ================================
 
 
