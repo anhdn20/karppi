@@ -5,7 +5,6 @@ use App\Http\Controllers\admin\FoodController;
 use App\Http\Controllers\admin\blogController as AdminBlogController;
 use App\Http\Controllers\admin\categoriesController;
 use App\Http\Controllers\admin\galleryController;
-use App\Http\Controllers\admin\MenuController;
 use App\Http\Controllers\admin\reviewController;
 use App\Http\Controllers\admin\tourController as AdminTourController;
 use App\Http\Controllers\admin\userController;
@@ -50,6 +49,7 @@ route::group(['middleware' => 'checkLogin'],function(){
             route::get('/', [AdminController::class, 'food']);
             route::post('/create', [FoodController::class, 'create']);
             Route::post('/delete', [FoodController::class, 'delete']);
+            Route::post('/detail', [FoodController::class, 'detail']);
         });
         Route::post('/data-food', [FoodController::class, 'list']);
         Route::post('/tour-detail', [AdminTourController::class, 'detail']);

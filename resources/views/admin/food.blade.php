@@ -18,7 +18,7 @@
             <div class="modal-content">
 
                     <div class="modal-header">
-                        <h4 class="modal-title">Thêm/chỉnh sửa tour</h4>
+                        <h4 class="modal-title">Thêm/chỉnh sửa</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -27,13 +27,6 @@
                         @csrf
                         <div class="modal-body">
                             <div class="card card-primary card-outline card-outline-tabs">
-                                <div class="card-header p-0 border-bottom-0">
-                                    <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Tiếng việt</a>
-                                        </li>
-                                    </ul>
-                                </div>
                                 <div class="card-body">
                                     <div class="tab-content" id="custom-tabs-four-tabContent">
                                         <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
@@ -201,7 +194,7 @@
             $(document).on('click','.update',async function (e){
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = '{{url("/karppi/admin/tour-detail")}}';
+                var url = '{{url("/karppi/admin/food/detail")}}';
                 // thông báo chờ
                 Show_wait_announce();
                 await $.ajax({
@@ -216,51 +209,14 @@
                         swal.close()
                         if(response.status == 0){
                             let data = response.data;
-                            let tour = data.detail;
+                            let food = data.detail;
 
                             // set dữ liệu tour
-                            $('#title_vi').val(tour.title_vi);
-                            $('#title_en').val(tour.title_en);
-                            $('#sub_title_vi').val(tour.sub_title_vi);
-                            $('#sub_title_en').val(tour.sub_title_en);
-                            $('#title_tab1_vi').val(tour.title_tab1_vi);
-                            $('#title_tab1_en').val(tour.title_tab1_en);
+                            $('#food_name').val(food.name);
+                            $('#price').val(food.price);
+                            $('#description').val(food.description);
+                            $('#food_category_id').val(food.category_id).change();
 
-                            $('#des_tab1_vi').summernote('code',tour.des_tab1_vi);
-                            $('#des_tab2_vi').summernote('code',tour.des_tab2_vi);
-                            $('#des_tab3_vi').summernote('code',tour.des_tab3_vi);
-                            $('#des_tab4_vi').summernote('code',tour.des_tab4_vi);
-                            $('#offer_vi').summernote('code',tour.offer_vi);
-                            $('#des_tab1_en').summernote('code',tour.des_tab1_en);
-                            $('#des_tab2_en').summernote('code',tour.des_tab2_en);
-                            $('#des_tab3_en').summernote('code',tour.des_tab3_en);
-                            $('#des_tab4_en').summernote('code',tour.des_tab4_en);
-                            $('#offer_en').summernote('code',tour.offer_en);
-
-                            $('#video1').val(tour.video1);
-                            $('#video2').val(tour.video2);
-                            $('#video360').val(tour.video360);
-                            $('#price').val(tour.price);
-                            $('#price_discount').val(tour.price_discount);
-
-                            $('#tab').val(tour.tab).change();
-                            $('#tag').val(tour.tag).change();
-                            $('#categoryId').val(tour.id_category).change();
-
-                            let gallery = '';
-                            for (let i = 0; i < data.galleries.length; i++) {
-                                let img = '{{asset("uploads/")}}' + "/" + data.galleries[i].path ;
-                                gallery += `<div class="item">
-                                                <div class="icon_del" data-id="${data.galleries[i].id}">
-                                                    <i class="fas fa-times"></i>
-                                                </div>
-                                                <img src="${img}" alt="">
-                                            </div>`;
-
-                            }
-
-                            $('.box_gallery').show();
-                            $('.box_gallery').html(gallery);
 
 
 
