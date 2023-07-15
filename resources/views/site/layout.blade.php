@@ -122,6 +122,13 @@
         </div>
     </header>
     @yield('content')
+
+    {{-- nút booking table --}}
+
+
+    <a href="#" class="btnbook">Book a table</a>
+
+
     <div class="boxgap">
 
     </div>

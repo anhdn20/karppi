@@ -44,6 +44,20 @@ img{
 header, .header,.header .row{
     height: 130px;
 }
+
+a.btnbook{
+    position: fixed;
+    top: 35%;
+    right: 0;
+    transform-origin: right bottom 26px;
+    transform: rotate(-90deg);
+    background-color: #000000;
+    color: #ffffff;
+    padding: 3px 10px;
+    font-size: 18px;
+    border-radius: .4rem;
+    z-index: 9999999 !important;
+}
 .header{
     position: fixed;
     background-color: var(--main-color);
