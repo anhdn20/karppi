@@ -32,9 +32,6 @@
                                         <li class="nav-item">
                                             <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Tiếng việt</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Tiếng anh</a>
-                                        </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
@@ -44,13 +41,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Tên Món ăn</label>
-                                                        <input name="title_vi" class="form-control" id="title_vi" placeholder="Nhập tên tour" />
+                                                        <input name="food_name" class="form-control" id="food_name" placeholder="Nhập tên món ăn" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Danh mục</label>
-                                                        <select class="form-control select2" name="categoryId" id="categoryId" style="width: 100%;">
+                                                        <select class="form-control select2" name="food_category_id" id="food_category_id" style="width: 100%;">
                                                             @foreach ($foodCategories as $value)
                                                             <option value="{{$value->id}}">{{$value->name}}</option>
                                                             @endforeach
@@ -66,8 +63,8 @@
 
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="exampleInputPassword1">Mô tả ngắn</label>
-                                                        <textarea name="sub_title_vi" class="form-control" id="sub_title_vi" placeholder="Nhập mô tả"></textarea>
+                                                        <label for="exampleInputPassword1">Mô tả</label>
+                                                        <textarea name="description" class="form-control" id="description" placeholder="Nhập mô tả"></textarea>
                                                     </div>
                                                 </div>
 
@@ -76,7 +73,7 @@
                                                     <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="fallback">
-                                                            <input name="file" type="file" id="image-upload1" multiple>
+                                                            <input name="food_image" type="file" id="food_image" multiple>
                                                         </div>
                                                         <div class="dz-message needsclick">
                                                             <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>
@@ -158,7 +155,7 @@
                 dataForm += '&image2=' + image2;
                 dataForm += '&pdf=' + pdf;
                 dataForm += '&gallery=' + gallery;
-                var url = '{{url("/cludmed/admin/quan-li-tour/them")}}';
+                var url = '{{url("/cludmed/admin/food/create")}}';
                 insert(url,dataForm);
             })
 
