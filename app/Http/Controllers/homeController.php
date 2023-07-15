@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\FoodCategory;
 use App\Models\FoodMenu;
+use App\Models\Gallery;
 use App\Models\Image;
 use App\Models\review;
 use App\Models\Tour;
@@ -43,7 +44,10 @@ class homeController extends Controller
 
     public function gallery(Request $r)
     {
-        return view('site.gallery');
+        // lấy danh sách gallery
+        $gallery = Gallery::where('is_deleted',0)->orderBy('priority','DESC')->get();
+
+        return view('site.gallery',compact('gallery'));
     }
 
 }

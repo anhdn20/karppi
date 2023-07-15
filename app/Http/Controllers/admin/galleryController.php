@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gallery;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use DataTables;
@@ -13,11 +14,11 @@ class galleryController extends Controller
 
     public function detail(Request $r){
         $params = $r->all(); //dang array
-        return ['status' => 0, 'data' => Image::find($params['id'])];
+        return ['status' => 0, 'data' => Gallery::find($params['id'])];
     }
 
     public function list(){
-        $list = Image::where('is_deleted', 0)->orderBy('id','DESC')->get();
+        $list = Gallery::where('is_deleted', 0)->orderBy('id','DESC')->get();
             return Datatables::of($list)
                 ->editColumn('image', function ($row) {
                     $pathUpload = '';
@@ -51,20 +52,15 @@ class galleryController extends Controller
     public function store(Request $r){
         $params = $r->all(); //dang array
         try {
-            // validation
+            $outputSuccess = ['status' => 0,'mess' => 'Thành công'];
+
             // validation
             $validator = Validator::make($params, [
-                'title_vi' => 'required|max:200|unique:image,title_vi,'.$params['id'],
-                'title_en' => 'required|max:200|unique:image,title_en,'.$params['id'],
-                'type' => 'required|unique:image,type,'.$params['id']
+                'title' => 'max:200',
+                'type' => 'required|in:IMAGE,VIDEO'
             ],[
-                'title_vi.required' => 'Chưa nhập thông tin tiêu đề hình ảnh',
-                'title_vi.unique' => 'Trùng thông tin tiêu đề hình ảnh',
-                'title_vi.max' => 'không được nhập dài quá 200 kí tự',
-                'title_en.required' => 'Chưa nhập thông tin tiêu đề hình ảnh',
-                'title_en.unique' => 'Trùng thông tin tiêu đề hình ảnh',
-                'title_en.max' => 'không được nhập dài quá 200 kí tự',
-                'type.unique' => 'Ảnh ở vị trí này đã được tạo',
+                'title.max' => 'không được nhập dài quá 200 kí tự',
+                'type.in' => 'Loại dữ liệu chưa chính xác'
             ]);
 
             if($validator->fails()){
@@ -72,46 +68,35 @@ class galleryController extends Controller
             }
             // chuẩn bị data
             $data = [
-                'title_vi' => $params['title_vi'],
-                'title_en' => $params['title_en'],
+                'title' => $params['title'],
                 'type' => $params['type']
             ];
 
-            if(isset($params['sub_title_vi']) && $params['sub_title_vi'] != ''){
-                $data['sub_title_vi'] = $params['sub_title_vi'];
-            }
-
-            if(isset($params['sub_title_en']) && $params['sub_title_en'] != ''){
-                $data['sub_title_en'] = $params['sub_title_en'];
-            }
-
-            if(isset($params['text_btn_vi']) && $params['text_btn_vi'] != ''){
-                $data['text_btn_vi'] = $params['text_btn_vi'];
-            }
-
-            if(isset($params['text_btn_en']) && $params['text_btn_en'] != ''){
-                $data['text_btn_en'] = $params['text_btn_en'];
-            }
-
             if(isset($params['image']) && $params['image'] != ''){
                 $data['image'] = $params['image'];
+                $outputSuccess['type'] = 'reload';
             }
 
-            if(isset($params['url_direction']) && $params['url_direction'] != ''){
-                $data['url_direction'] = $params['url_direction'];
+            if(isset($params['url'])){
+                $data['url'] = $params['url'];
+            }
+
+            if(isset($params['priority'])){
+                $data['priority'] = $params['priority'];
             }
 
             // kiểm tra nếu nó có ID thì sẽ update
             if(isset($params['id']) && $params['id'] != 'undefined' && $params['action'] == 'update'){
                 // update vào database
-                Image::where('id',$params['id'])->update($data);
-                return ['status' => 0];
+                Gallery::where('id',$params['id'])->update($data);
+                return $outputSuccess;
             }
             // add vào database
-            Image::create($data);
+            Gallery::create($data);
 
-            return ['status' => 0,'mess' => $params];
+            return $outputSuccess;
         } catch (\Throwable $th) {
+            dd($th);
             return ['status' => 1,'mess' => $th];
         }
     }
@@ -120,7 +105,9 @@ class galleryController extends Controller
         $params = $r->all(); //dang array
         try {
             // rev khỏi database
-            $exec = Image::where('id', $params['id'])->delete();
+            $exec = Gallery::where('id', $params['id'])->update([
+                'is_deleted' => 1
+            ]);
             return ['status' => 0];
         } catch (\Throwable $th) {
             return ['status' => 1,'mess' => $th];

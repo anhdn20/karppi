@@ -1,9 +1,9 @@
 @extends('admin.layout')
 @section('content')
-    <x-headadmin title="Quản lí review"></x-headadmin>
+    <x-headadmin title="Quản lí Gallery"></x-headadmin>
 
     @php
-        $field = ['TT','Tên','mô tả','#'];
+        $field = ['TT','Tiêu đề','Ảnh','Sắp xếp','#'];
     @endphp
 
     <x-table :field="$field"></x-table>
@@ -12,7 +12,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Thêm/chỉnh sửa review</h4>
+                    <h4 class="modal-title">Thêm/chỉnh sửa gallery</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -24,38 +24,31 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Tên review</label>
-                                        <input name="title_vi" class="form-control" id="title_vi" placeholder="Nhập tên">
+                                        <label for="exampleInputEmail1">TIêu đề gallery</label>
+                                        <input name="title" class="form-control" id="title" placeholder="Nhập tiêu đề">
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Mô tả</label>
-                                        <textarea name="description_vi" class="form-control" id="description_vi" placeholder="Nhập mô tả"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-5">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Tên review (en)</label>
-                                        <input name="title_en" class="form-control" id="title_en" placeholder="Nhập tên">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Mô tả (en)</label>
-                                        <textarea name="description_en" class="form-control" id="description_en" placeholder="Nhập mô tả"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-5">
-                                <div class="box_gallery">
-                                    <div class="item">
-                                        <div class="icon_del">
-                                            <i class="fas fa-times"></i>
+                                        <label>Loại</label>
+                                        <div class="select2-purple">
+                                            <select class="form-control select2" name="type" id="type" style="width: 100%;">
+                                                <option value="IMAGE">Hình ảnh</option>
+                                                <option value="VIDEO">Video</option>
+                                            </select>
                                         </div>
-                                        <img src="" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Đường dẫn Youtube (Nếu có)</label>
+                                        <input name="url" class="form-control" id="url" placeholder="Nhập đường dẫn">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Thứ tự ưu tiên</label>
+                                        <input name="priority" class="form-control" id="priority" placeholder="Mặc định là 0">
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +97,7 @@
 
         var myDropzone = new Dropzone(".dropzone", {
             maxFilesize: 3,
-            maxFiles: 50,
+            maxFiles: 1,
             acceptedFiles: ".jpeg,.jpg,.png,.webp",
             addRemoveLinks: true,
             success: function(file, response){
@@ -114,19 +107,6 @@
 
             },
             removedfile: function(file) {
-                // console.log(file);
-                // var fileName = file.name;
-                // var _token = $('input[name="_token"]').val();
-                // $.ajax({
-                // type: 'post',
-                // url: "{{url('/dropzonedel')}}",
-                // data: {name: fileName,_token:_token},
-                //     success: function(data){
-                //         let indexRe = FileArr1.indexOf(data);
-                //             FileArr1.splice(indexRe,1);
-                //     }
-                // });
-
                 var _ref;
                 return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
             }
@@ -137,12 +117,12 @@
             // tải dữ liệu lúc mới vào trang
             let DataLoadFirst = [
                 {data: 'id', name: 'Thứ tự'},
-                {data: 'title_vi', name: 'Tên'},
-                {data: 'description_vi', name: 'Mô tả'},
-                // {data: 'image', name: 'Ảnh'},
+                {data: 'title', name: 'Tên'},
+                {data: 'image', name: 'Mô tả'},
+                {data: 'priority', name: 'Sắp xếp'},
                 {data: 'action', name: 'Hành Động'},
             ];
-            load_data_ajax_datatables("{{ url('/cludmed/admin/data-review') }}",DataLoadFirst);
+            load_data_ajax_datatables("{{ url('/karppi/admin/data-gallery') }}",DataLoadFirst);
 
             //insert
             $('#insertData').click(function (e) {
@@ -157,8 +137,8 @@
                 let image = FileArr1;
                 var dataForm = $('#dataForm').serialize();
                 dataForm += '&image=' + image;
-                console.log(dataForm);
-                var url = '{{url("/cludmed/admin/quan-li-review/them")}}';
+
+                var url = '{{url("/karppi/admin/gallery/them")}}';
                 insert(url,dataForm);
             })
 
@@ -167,7 +147,7 @@
                 e.preventDefault();
                 var id = $(this).data('id');
                 console.log(id);
-                var url = '{{url("/cludmed/admin/quan-li-review/xoa")}}';
+                var url = '{{url("/karppi/admin/gallery/xoa")}}';
                 del(url,id);
             })
 
@@ -176,15 +156,13 @@
                 e.preventDefault();
                 var id = $(this).data('id');
                 console.log(id);
-                var url = '{{url("/cludmed/admin/quan-li-review/xoa-anh")}}';
+                var url = '{{url("/karppi/admin/gallery/xoa-anh")}}';
                 delGallery(url,id, $(this));
             })
 
             // set action cho button
             $(document).on('click','#modalAddNew',async function (e){
                 $('#action').attr('value', 'create');
-                $('#description_vi').summernote('code','');
-                $('#description_en').summernote('code','');
                 $("#dataForm")[0].reset()
                 $('.box_gallery').hide();
             })
@@ -196,7 +174,7 @@
                 // myDropzone.removeAllFiles(true);
 
                 var id = $(this).data('id');
-                var url = '{{url("/cludmed/admin/review-detail")}}';
+                var url = '{{url("/karppi/admin/gallery-detail")}}';
                 // thông báo chờ
                 Show_wait_announce();
                 await $.ajax({
@@ -211,26 +189,10 @@
                         swal.close()
                         if(response.status == 0){
                             let data = response.data;
-                            $('#title_vi').val(data.title_vi);
-                            $('#title_en').val(data.title_en);
-                            // $('#description').val(data.description);
-                            $('#description_vi').summernote('code',data.description_vi);
-                            $('#description_en').summernote('code',data.description_en);
-                            // console.log(data);
-                            let gallery = '';
-                            for (let i = 0; i < data.galleries.length; i++) {
-                                let img = '{{asset("uploads/")}}' + "/" + data.galleries[i].path ;
-                                gallery += `<div class="item">
-                                                <div class="icon_del" data-id="${data.galleries[i].id}">
-                                                    <i class="fas fa-times"></i>
-                                                </div>
-                                                <img src="${img}" alt="">
-                                            </div>`;
-
-                            }
-
-                            $('.box_gallery').show();
-                            $('.box_gallery').html(gallery);
+                            $('#title').val(data.title);
+                            $('#type').val(data.type).change();
+                            $('#url').val(data.url);
+                            $('#priority').val(data.priority);
 
                             $('#id').attr('value', data.id);
                             $('#action').attr('value', 'update');

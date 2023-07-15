@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th7 15, 2023 lúc 10:22 AM
+-- Thời gian đã tạo: Th7 15, 2023 lúc 11:02 AM
 -- Phiên bản máy phục vụ: 5.7.33
 -- Phiên bản PHP: 7.4.19
 
@@ -120,12 +120,37 @@ CREATE TABLE `food_menu_relation` (
 CREATE TABLE `gallery` (
   `id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `url` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `type` enum('IMAGE','VIDEO') COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_deleted` tinyint(4) DEFAULT NULL,
+  `priority` int(3) DEFAULT '0',
+  `is_deleted` tinyint(1) DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `gallery`
+--
+
+INSERT INTO `gallery` (`id`, `title`, `image`, `url`, `type`, `priority`, `is_deleted`, `created_at`, `updated_at`) VALUES
+(1, 'test', '1_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:39:29', '2023-07-15 17:53:02'),
+(2, NULL, '2_2023-07-15-17.jpg', NULL, 'IMAGE', 1, 0, '2023-07-15 17:50:49', '2023-07-15 18:01:03'),
+(3, NULL, '3_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:53:08', '2023-07-15 17:53:08'),
+(4, NULL, '4_2023-07-15-17.jpg', NULL, 'IMAGE', 2, 0, '2023-07-15 17:53:18', '2023-07-15 18:01:22'),
+(5, NULL, '5_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:53:24', '2023-07-15 17:53:24'),
+(6, NULL, '6_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:53:29', '2023-07-15 17:53:29'),
+(7, NULL, '7_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:53:35', '2023-07-15 17:53:35'),
+(8, NULL, '8_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:53:41', '2023-07-15 17:53:41'),
+(9, NULL, '9_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:53:47', '2023-07-15 17:53:47'),
+(10, NULL, '10_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:53:53', '2023-07-15 17:53:53'),
+(11, NULL, '11_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:53:59', '2023-07-15 17:53:59'),
+(12, NULL, '12_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:54:05', '2023-07-15 17:54:05'),
+(13, NULL, '13_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:54:10', '2023-07-15 17:54:10'),
+(14, NULL, '14_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:54:15', '2023-07-15 17:54:15'),
+(15, NULL, '15_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 1, '2023-07-15 17:54:20', '2023-07-15 17:55:23'),
+(16, NULL, '15_2023-07-15-17.jpg', NULL, 'IMAGE', 0, 0, '2023-07-15 17:55:28', '2023-07-15 17:55:28'),
+(17, NULL, 'https___nsmed_dream_PRODUCT_CENTER_DESTINATIONS_SNOW_Winter_Alpes_Italie_Pragelato_Sestriere_397693-i84lu8cjih-swhr_2023-07-15-17.webp', 'https://www.youtube.com/watch?v=o_lN37OAJ9U&list=RDroa8fMuYh7M', 'VIDEO', 0, 0, '2023-07-15 17:59:46', '2023-07-15 17:59:52');
 
 -- --------------------------------------------------------
 
@@ -221,7 +246,7 @@ ALTER TABLE `food_menu_relation`
 -- AUTO_INCREMENT cho bảng `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
