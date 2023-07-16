@@ -51,6 +51,11 @@ class AdminController extends Controller{
         return view('admin.foodGroup');
     }
 
+    public function foodMenu()
+    {
+        return view('admin.foodMenu');
+    }
+
     public function blog(){
         $categories = Category::where('is_deleted', 0)->where('type',1)->get();
         return view('admin.blog', compact('categories'));

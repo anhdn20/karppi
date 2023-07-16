@@ -15,6 +15,14 @@ class FoodController extends Controller
         $foodModel = new Food();
         $foods = $foodModel->getList();
         return Datatables::of($foods)
+            ->editColumn('image_url', function ($row) {
+                $html = 'Không tìm thấy';
+                if(!empty($row->image_url)){
+                    $pathUpload = asset('uploads/').'/'.$row->image_url;
+                    $html = '<img src="'.$pathUpload.'" alt="'.$row->name.'" style="max-width:110px;">';
+                }
+                return $html;
+            })
             ->editColumn('category_name', function ($row) {
                 if (empty($row->category_name)) {
                     return '<span class="badge badge-secondary">Chưa chọn</span>';
@@ -67,7 +75,8 @@ class FoodController extends Controller
                 'category_id' => $params['food_category_id'],
                 'name' => $params['food_name'],
                 'price' => $params['price'],
-                'description' => $params['description']
+                'description' => $params['description'],
+                'image_url' => $params['image']
             ];
             if ($params['action'] == 'create') {
                 $result = Food::create($data);

@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\admin\bannerController;
-use App\Http\Controllers\admin\FoodController;
 use App\Http\Controllers\admin\blogController as AdminBlogController;
 use App\Http\Controllers\admin\categoriesController;
+use App\Http\Controllers\admin\FoodController;
 use App\Http\Controllers\admin\FoodGroupController;
+use App\Http\Controllers\admin\FoodMenuController;
 use App\Http\Controllers\admin\galleryController;
 use App\Http\Controllers\admin\reviewController;
-use App\Http\Controllers\admin\tourController as AdminTourController;
 use App\Http\Controllers\admin\userController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\dropZoneController;
@@ -65,16 +65,15 @@ route::group(['middleware' => 'checkLogin'],function(){
         });
         // ============================ Quản lí food Group =============================
 
-        // =============================== quản lí tour ================================
-        route::prefix('/quan-li-tour')->group(function(){
-            route::get('/', [AdminController::class, 'tour']);
-            route::post('/them', [AdminTourController::class, 'store']);
-            Route::post('/xoa', [AdminTourController::class, 'delete']);
-            Route::post('/xoa-anh', [AdminTourController::class, 'deleteGallery']);
+        // ============================ Quản lí food menu ==============================
+        route::prefix('/food-group')->group(function () {
+            route::get('/', [AdminController::class, 'foodMenu']);
+            Route::post('/list', [FoodMenuController::class, 'list']);
+            route::post('/create', [FoodMenuController::class, 'create']);
+            Route::post('/delete', [FoodMenuController::class, 'delete']);
+            Route::post('/detail', [FoodMenuController::class, 'detail']);
         });
-        Route::post('/data-tour', [AdminTourController::class, 'list']);
-        Route::post('/tour-detail', [AdminTourController::class, 'detail']);
-        // =============================== quản lí tour ================================
+        // ============================ Quản lí food Group =============================
 
 
         // =============================== quản lí user ================================

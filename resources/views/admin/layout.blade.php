@@ -138,7 +138,7 @@
                 <a href="{{ asset('/karppi/admin/quan-li-tour') }}" class="nav-link">
                     <i class="nav-icon fas fa-file-alt"></i>
                     <p>
-                        Quản lí tour
+                        Quản lí thực đơn
                     </p>
                 </a>
             </li>
