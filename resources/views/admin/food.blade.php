@@ -4,6 +4,22 @@
         hr{
             margin-top: 0.4rem;
         }
+        /* Custom CSS to center align the image */
+        .fixed-size-image-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 200px;
+            padding: 5px;
+            border: 1px solid #ccc; /* Optional: Add a border to the block */
+        }
+
+        /* Style the image to fit the block without cropping */
+        .fixed-size-image-block img {
+            max-width: 100%;
+            max-height: 100%;
+        }
     </style>
     <x-headadmin title="Món ăn"></x-headadmin>
 
@@ -51,6 +67,15 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Giá</label>
                                                         <input name="price" type="number" class="form-control" value="0" id="price" placeholder="Nhập giá" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">Hình ảnh</label>
+                                                        <div class="fixed-size-image-block">
+                                                            <img id='image' src="" alt="" />
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -178,22 +203,7 @@
             // set action cho button
             $(document).on('click','#modalAddNew',async function (e){
                 $('#action').attr('value', 'create');
-                // reset lại form cho tạo mới
-                $("#dataForm")[0].reset()
-                // $('.select2').select2()
-                $('#des_tab1_vi').summernote('code','');
-                $('#des_tab2_vi').summernote('code','');
-                $('#des_tab3_vi').summernote('code','');
-                $('#des_tab4_vi').summernote('code','');
-                $('#offer_vi').summernote('code','');
-                $('#des_tab1_en').summernote('code','');
-                $('#des_tab2_en').summernote('code','');
-                $('#des_tab3_en').summernote('code','');
-                $('#des_tab4_en').summernote('code','');
-                $('#offer_en').summernote('code','');
-                $('.box_gallery').hide();
-                // $("#tag").val('').change();
-                // $("#tab").val('').change();
+
             })
 
             //load data edit
@@ -222,11 +232,7 @@
                             $('#price').val(food.price);
                             $('#description').val(food.description);
                             $('#food_category_id').val(food.category_id).change();
-
-
-
-
-
+                            $('#image').attr('src', food.image_url);
                             $('#id').attr('value', food.id);
                             $('#action').attr('value', 'update');
                             show_success_announce(300);

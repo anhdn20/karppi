@@ -84,10 +84,10 @@ class FoodController extends Controller
                 $result = Food::where('is_deleted', 0)->where('id', $params['id'])->update($data);
             }
             if (!$result) {
-                throw new \Exception('Thêm món ăn thất bại');
+                throw new \Exception('Thất bại');
             }
             return $outputSuccess;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return ['status' => 1,'mess' => $e->getMessage()];
         }
     }
@@ -101,6 +101,7 @@ class FoodController extends Controller
         $data['detail']->description = html_entity_decode($data['detail']->description);
         $data['detail']->category_id = html_entity_decode($data['detail']->category_id);
         $data['detail']->price = html_entity_decode($data['detail']->price);
+        $data['detail']->image_url = html_entity_decode(asset('uploads/').'/'.$data['detail']->image_url);
 
         // lấy gallery
         //$data['categories'] = FoodCategory::where('is_deleted', 0)->get();

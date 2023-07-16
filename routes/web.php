@@ -66,7 +66,7 @@ route::group(['middleware' => 'checkLogin'],function(){
         // ============================ Quản lí food Group =============================
 
         // ============================ Quản lí food menu ==============================
-        route::prefix('/food-group')->group(function () {
+        route::prefix('/food-menu')->group(function () {
             route::get('/', [AdminController::class, 'foodMenu']);
             Route::post('/list', [FoodMenuController::class, 'list']);
             route::post('/create', [FoodMenuController::class, 'create']);

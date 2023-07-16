@@ -135,7 +135,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ asset('/karppi/admin/quan-li-tour') }}" class="nav-link">
+                <a href="{{ asset('/karppi/admin/food-menu') }}" class="nav-link">
                     <i class="nav-icon fas fa-file-alt"></i>
                     <p>
                         Quản lí thực đơn

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Food;
 use App\Models\FoodCategory;
+use App\Models\FoodMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -14,13 +15,26 @@ use Yajra\DataTables\DataTables;
 class FoodMenuController extends Controller
 {
     public function list(){
-        $category = new FoodCategory();
-        $data = $category->getList();
+        $menuModel = new FoodMenu();
+        $data = $menuModel->getList();
         return Datatables::of($data)
+            ->editColumn('is_active', function ($row) {
+                return $row->is_active == 1 ?
+                    '<p style="color: limegreen">Đang dùng</p>' : '<p style="color: darkgrey">Không dùng</p>';
+            })
+            ->editColumn('image_url', function ($row) {
+                $html = 'Không tìm thấy';
+                if(!empty($row->image_url)) {
+                    $pathUpload = asset('uploads/').'/'.$row->image_url;
+                    $html = '<img src="'.$pathUpload.'" alt="'.$row->name.'" style="max-width:110px;">';
+                }
+                return $html;
+            })
             ->addIndexColumn()
             ->addColumn('action', function($row){
                 return '<td>
                             <div class="row">
+
                                 <div class="col-6">
                                     <button type="button" data-toggle="modal" data-target="#modal-lg" data-id="'.$row->id.'" class="btn update btn-block bg-gradient-warning">Sửa</button>
                                 </div>
@@ -30,7 +44,7 @@ class FoodMenuController extends Controller
                             </div>
                        </td>';
             })
-            ->rawColumns(['action','category_name'])
+            ->rawColumns(['action','is_active', 'image_url'])
             ->make(true);
     }
     public function create(Request $r)
@@ -45,8 +59,9 @@ class FoodMenuController extends Controller
                 'name' => 'required|max:100',
                 'description' => 'max:1000',
             ],[
-                'name.required' => 'Chưa nhập tên',
-                'name.max' => 'Tên món không được nhập dài quá 100 kí tự',
+                'name.required' => 'Chưa nhập tên món ăn',
+                'name.max' => 'Tên món anhw không được nhập dài quá 100 kí tự',
+                'description.max' => 'Mô tả không được nhập quá 1000 ký tự',
             ]);
 
             if($validator->fails()){
@@ -56,18 +71,19 @@ class FoodMenuController extends Controller
             // chuẩn bị data insert bảng product
             $data = [
                 'name' => $params['name'],
-                'description' => $params['description']
+                'description' => $params['description'],
+                'image_url' => $params['image']
             ];
             if ($params['action'] == 'create') {
-                $result = FoodCategory::create($data);
+                $result = FoodMenu::create($data);
             } else {
-                $result = FoodCategory::where('is_deleted', 0)->where('id', $params['id'])->update($data);
+                $result = FoodMenu::where('is_deleted', 0)->where('id', $params['id'])->update($data);
             }
             if (!$result) {
-                throw new \Exception('Thêm thất bại');
+                throw new \Exception('Thất bại');
             }
             return $outputSuccess;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return ['status' => 1,'mess' => $e->getMessage()];
         }
     }
@@ -75,10 +91,11 @@ class FoodMenuController extends Controller
     {
         $params = $r->all(); //dang array
 
-        // product detail
-        $data['detail'] = FoodCategory::where('id', $params['id'])->where('is_deleted', 0)->first();
-        $data['detail']->name = html_entity_decode($data['detail']->name);
-        $data['detail']->description = html_entity_decode($data['detail']->description);
+        // menu detail
+        $data['menu'] = FoodMenu::where('id', $params['id'])->where('is_deleted', 0)->first();
+        $data['menu']->name = html_entity_decode($data['menu']->name);
+        $data['menu']->description = html_entity_decode($data['menu']->description);
+        $data['menu']->image_url = html_entity_decode(asset('uploads/').'/'.$data['menu']->image_url);
 
         return ['status' => 0, 'data' => $data] ;
     }
