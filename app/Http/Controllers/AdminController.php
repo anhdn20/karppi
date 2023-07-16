@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\FoodCategory;
+use App\Models\FoodMenu;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,8 @@ class AdminController extends Controller{
 
     public function foodGroup()
     {
-        return view('admin.foodGroup');
+        $menus = FoodMenu::where('is_deleted', 0)->get();
+        return view('admin.foodGroup', compact('menus'));
     }
 
     public function foodMenu()

@@ -9,8 +9,9 @@ class FoodMenuRelation extends Model
     protected $table = 'food_menu_relation';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'food_id', 'menu_id'
+        'food_group_id', 'menu_id'
     ];
+
 
 
 }

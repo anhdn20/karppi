@@ -4,11 +4,14 @@
         hr{
             margin-top: 0.4rem;
         }
+        .input-desc{
+            min-height: 200px;
+        }
     </style>
     <x-headadmin title="Nhóm món ăn"></x-headadmin>
 
     @php
-        $field = ['Id','Hình ảnh','Tên' ,'Mô tả', '#'];
+        $field = ['Id','Tên' ,'Mô tả', '#'];
     @endphp
 
     <x-table :field="$field"></x-table>
@@ -37,26 +40,36 @@
                                                         <input name="name" class="form-control" id="name" placeholder="Nhập tên nhóm" />
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Menu</label>
+                                                        <select class="form-control select2" name="menu_id" id="food_category_id" style="width: 100%;">
+                                                            @foreach ($menus as $value)
+                                                                <option value="{{$value->id}}">{{$value->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Mô tả</label>
-                                                        <textarea name="description" class="form-control" id="description" placeholder="Nhập mô tả"></textarea>
+                                                        <textarea name="description" class="form-control input-desc" id="description" placeholder="Nhập mô tả"></textarea>
                                                     </div>
                                                 </div>
 
-                                                <div class="card-body" id="formupimage">
-                                                    <label for="">Hình ảnh</label>
-                                                    <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <div class="fallback">
-                                                            <input name="food_image" type="file" id="food_image" multiple>
-                                                        </div>
-                                                        <div class="dz-message needsclick">
-                                                            <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>
-                                                            <h4>Thả tệp vào đây hoặc nhấp để tải lên. (Chỉ khi cần thêm hoặc thay đổi)</h4>
-                                                        </div>
-                                                    </form>
-                                                </div>
+{{--                                                <div class="card-body" id="formupimage">--}}
+{{--                                                    <label for="">Hình ảnh</label>--}}
+{{--                                                    <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload" enctype="multipart/form-data">--}}
+{{--                                                        @csrf--}}
+{{--                                                        <div class="fallback">--}}
+{{--                                                            <input name="food_image" type="file" id="food_image" multiple>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="dz-message needsclick">--}}
+{{--                                                            <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>--}}
+{{--                                                            <h4>Thả tệp vào đây hoặc nhấp để tải lên. (Chỉ khi cần thêm hoặc thay đổi)</h4>--}}
+{{--                                                        </div>--}}
+{{--                                                    </form>--}}
+{{--                                                </div>--}}
 
                                             </div>
                                         </div>
@@ -77,30 +90,11 @@
     </div>
 
     <script type="text/javascript">
-         function setSuccessUpload(param){
-            param.style.transition = '.5s';
-            param.style.top = '125%';
-
-            setTimeout(() => {
-                param.style.opacity = '1';
-                param.style.top = '50%';
-                    setTimeout(() => {
-                        param.style.opacity = '0';
-                    }, 2000);
-            }, 500);
-        }
-
-        var FileArr = [];
-        var FileArr1 = [];
-        var FileArr2 = [];
-        var FileArr3 = [];
-        var FileArr4 = [];
 
         $(document).ready(function() {
             // tải dữ liệu lúc mới vào trang
             let DataLoadFirst = [
                 {data: 'id', name: 'Id'},
-                {data: 'image_url', name: 'Hình ảnh'},
                 {data: 'name', name: 'Tên'},
                 {data: 'description', name: 'Mô tả'},
                 {data: 'action', name: 'Hành Động'}
@@ -119,17 +113,7 @@
                 }
                 var dataForm = $('#dataForm').serialize();
 
-                let image   = FileArr;
-                let image1  = FileArr1;
-                let image2  = FileArr2;
-                let pdf     = FileArr3;
-                let gallery = FileArr4;
 
-                dataForm += '&image='  + image;
-                dataForm += '&image1=' + image1;
-                dataForm += '&image2=' + image2;
-                dataForm += '&pdf=' + pdf;
-                dataForm += '&gallery=' + gallery;
                 var url = '{{url("/karppi/admin/food-group/create")}}';
                 insert(url,dataForm);
             })
@@ -141,16 +125,6 @@
                 var url = '{{url("/karppi/admin/food-group/delete")}}';
                 del(url,id);
             })
-
-            //xóa
-            $(document).on('click','.icon_del',function (e){
-                e.preventDefault();
-                var id = $(this).data('id');
-                console.log(id);
-                var url = '{{url("/karppi/admin/food-group/xoa-anh")}}';
-                delGallery(url,id, $(this));
-            })
-
             // set action cho button
             $(document).on('click','#modalAddNew',async function (e){
                 $('#action').attr('value', 'create');
@@ -184,7 +158,7 @@
                             $('#name').val(detail.name);
                             $('#description').val(detail.description);
                             $('#id').val(detail.id).change();
-
+                            $('#menu_id').val(food.menu_id).change();
                             $('#id').attr('value', detail.id);
                             $('#action').attr('value', 'update');
                             show_success_announce(300);

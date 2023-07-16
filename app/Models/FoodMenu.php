@@ -14,6 +14,7 @@ class FoodMenu extends Model
 
     public function getList()
     {
+        //return self::select('food_menu.id', 'food_menu.name', 'food_menu.description', 'food_menu.image_url')
         return self::where('is_deleted', 0)->get();
     }
 

@@ -20,6 +20,56 @@
             max-width: 100%;
             max-height: 100%;
         }
+
+        /* Style for the toggle switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide the default checkbox */
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* Styling for the slider (the visible part of the toggle switch) */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: 0.4s;
+        }
+
+        /* Styling for the slider when it's ON */
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+
+        /* Styling for the slider when it's OFF */
+        input:checked + .slider {
+            background-color: #7fe356;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
     </style>
     <x-headadmin title="Món ăn"></x-headadmin>
 
@@ -51,12 +101,6 @@
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Tên thực đơn</label>
                                                     <input name="name" class="form-control" id="name" placeholder="Nhập tên thực đơn" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group form-switch">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" checked>
-                                                    <label class="form-check-label" for="is_active">Hiển thị trên trang Menu</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -179,14 +223,7 @@
                 del(url,id);
             })
 
-            //xóa
-            $(document).on('click','.icon_del',function (e){
-                e.preventDefault();
-                var id = $(this).data('id');
-                console.log(id);
-                var url = '{{url("/karppi/admin/quan-li-tour/xoa-anh")}}';
-                delGallery(url,id, $(this));
-            })
+
 
             // set action cho button
             $(document).on('click','#modalAddNew',async function (e){
@@ -215,12 +252,19 @@
                             let data = response.data;
                             let menuDetail = data.menu;
 
-                            // set dữ liệu tour
+                            //set dữ liệu
                             $('#name').val(menuDetail.name);
                             $('#description').val(menuDetail.description);
                             $('#image').attr('src', menuDetail.image_url);
                             $('#id').attr('value', menuDetail.id);
                             $('#action').attr('value', 'update');
+                            $("#is_active").val(menuDetail.is_active);
+
+                            if (menuDetail.is_active == 1) {
+                                $("#is_active").prop("checked", true);
+                            } else {
+                                $("#is_active").prop("checked", false);
+                            }
                             show_success_announce(300);
                         }else{
                             show_fail_announce(response.mess)
@@ -228,6 +272,20 @@
                     }
                 });
             })
+
+            document.getElementById("is_active").addEventListener("change", function() {
+                // Get the checkbox state (checked or not checked)
+                var isChecked = this.checked;
+
+                // Do something based on the checkbox state (e.g., update settings, show/hide content, etc.)
+                if (isChecked) {
+                    $("#is_active").val(1);
+                // Perform actions for when the toggle is ON
+                } else {
+                    $("#is_active").val(0);
+                // Perform actions for when the toggle is OFF
+                }
+            });
         });
     </script>
 

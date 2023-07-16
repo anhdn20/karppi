@@ -44,6 +44,7 @@ class FoodGroupController extends Controller
             $validator = Validator::make($params, [
                 'name' => 'required|max:100',
                 'description' => 'max:1000',
+                'menu_id' => 'numeric'
             ],[
                 'name.required' => 'Chưa nhập tên',
                 'name.max' => 'Tên món không được nhập dài quá 100 kí tự',
@@ -56,7 +57,8 @@ class FoodGroupController extends Controller
             // chuẩn bị data insert bảng product
             $data = [
                 'name' => $params['name'],
-                'description' => $params['description']
+                'description' => $params['description'],
+                'menu_id' => $params['menu_id'] ?? 0
             ];
             if ($params['action'] == 'create') {
                 $result = FoodCategory::create($data);

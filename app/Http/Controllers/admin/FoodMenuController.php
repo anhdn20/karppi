@@ -19,8 +19,15 @@ class FoodMenuController extends Controller
         $data = $menuModel->getList();
         return Datatables::of($data)
             ->editColumn('is_active', function ($row) {
-                return $row->is_active == 1 ?
-                    '<p style="color: limegreen">Đang dùng</p>' : '<p style="color: darkgrey">Không dùng</p>';
+                $isCheck =  $row->is_active == 1 ? 'checked' : '';
+                return '<div class="form-group">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="is_active" name="is_active" '.$isCheck.' >
+                        <span class="slider"></span>
+                    </label>
+                </div>';
+//                return $row->is_active == 1 ?
+//                    '<p style="color: limegreen">Đang dùng</p>' : '<p style="color: darkgrey">Không dùng</p>';
             })
             ->editColumn('image_url', function ($row) {
                 $html = 'Không tìm thấy';
@@ -67,13 +74,21 @@ class FoodMenuController extends Controller
             if($validator->fails()){
                 return ['status' => 1,'mess' => $validator->errors()->first()];
             }
-
+            $isActive = $params['is_active'] ?? 0;
             // chuẩn bị data insert bảng product
             $data = [
                 'name' => $params['name'],
                 'description' => $params['description'],
-                'image_url' => $params['image']
+                'is_active' => $isActive
             ];
+            if (!empty($params['image'])) {
+                $data['image_url'] = $params['image'];
+            }
+            DB::beginTransaction();
+            if ($isActive == 1) {
+                //chỉ được 1 row active
+                FoodMenu::select()->update(['is_active' => 0]);
+            }
             if ($params['action'] == 'create') {
                 $result = FoodMenu::create($data);
             } else {
@@ -82,8 +97,10 @@ class FoodMenuController extends Controller
             if (!$result) {
                 throw new \Exception('Thất bại');
             }
+            DB::commit();
             return $outputSuccess;
         } catch (\Exception $e) {
+            DB::rollBack();
             return ['status' => 1,'mess' => $e->getMessage()];
         }
     }
