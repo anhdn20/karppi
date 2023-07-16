@@ -5,10 +5,10 @@
             margin-top: 0.4rem;
         }
     </style>
-    <x-headadmin title="Quản lí tour"></x-headadmin>
+    <x-headadmin title="Nhóm món ăn"></x-headadmin>
 
     @php
-        $field = ['TT','Tên','Mô tả','Giá' ,'Danh mục','#'];
+        $field = ['Id','Hình ảnh','Tên' ,'Mô tả', '#'];
     @endphp
 
     <x-table :field="$field"></x-table>
@@ -33,27 +33,10 @@
                                             <div class="row" id="form_tour">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Tên Món ăn</label>
-                                                        <input name="food_name" class="form-control" id="food_name" placeholder="Nhập tên món ăn" />
+                                                        <label for="exampleInputEmail1">Tên nhóm</label>
+                                                        <input name="name" class="form-control" id="name" placeholder="Nhập tên nhóm" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Danh mục</label>
-                                                        <select class="form-control select2" name="food_category_id" id="food_category_id" style="width: 100%;">
-                                                            @foreach ($foodCategories as $value)
-                                                            <option value="{{$value->id}}">{{$value->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Giá</label>
-                                                        <input name="price" type="number" class="form-control" value="0" id="price" placeholder="Nhập giá" />
-                                                    </div>
-                                                </div>
-
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Mô tả</label>
@@ -62,7 +45,7 @@
                                                 </div>
 
                                                 <div class="card-body" id="formupimage">
-                                                    <label for="">Ảnh đại diện chính</label>
+                                                    <label for="">Hình ảnh</label>
                                                     <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="fallback">
@@ -116,14 +99,13 @@
         $(document).ready(function() {
             // tải dữ liệu lúc mới vào trang
             let DataLoadFirst = [
-                {data: 'id', name: 'Thứ tự'},
+                {data: 'id', name: 'Id'},
+                {data: 'image_url', name: 'Hình ảnh'},
                 {data: 'name', name: 'Tên'},
                 {data: 'description', name: 'Mô tả'},
-                {data: 'price', name: 'Giá'},
-                {data: 'category_name', name: 'Danh mục'},
                 {data: 'action', name: 'Hành Động'}
             ];
-            load_data_ajax_datatables("{{ url('/karppi/admin/data-food') }}",DataLoadFirst);
+            load_data_ajax_datatables("{{ url('/karppi/admin/food-group/list') }}",DataLoadFirst);
 
             //insert
             $('#insertData').click(function (e) {
@@ -148,7 +130,7 @@
                 dataForm += '&image2=' + image2;
                 dataForm += '&pdf=' + pdf;
                 dataForm += '&gallery=' + gallery;
-                var url = '{{url("/karppi/admin/food/create")}}';
+                var url = '{{url("/karppi/admin/food-group/create")}}';
                 insert(url,dataForm);
             })
 
@@ -156,7 +138,7 @@
             $(document).on('click','.del',function (e){
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = '{{url("/karppi/admin/food/delete")}}';
+                var url = '{{url("/karppi/admin/food-group/delete")}}';
                 del(url,id);
             })
 
@@ -165,7 +147,7 @@
                 e.preventDefault();
                 var id = $(this).data('id');
                 console.log(id);
-                var url = '{{url("/karppi/admin/quan-li-tour/xoa-anh")}}';
+                var url = '{{url("/karppi/admin/food-group/xoa-anh")}}';
                 delGallery(url,id, $(this));
             })
 
@@ -174,27 +156,14 @@
                 $('#action').attr('value', 'create');
                 // reset lại form cho tạo mới
                 $("#dataForm")[0].reset()
-                // $('.select2').select2()
-                $('#des_tab1_vi').summernote('code','');
-                $('#des_tab2_vi').summernote('code','');
-                $('#des_tab3_vi').summernote('code','');
-                $('#des_tab4_vi').summernote('code','');
-                $('#offer_vi').summernote('code','');
-                $('#des_tab1_en').summernote('code','');
-                $('#des_tab2_en').summernote('code','');
-                $('#des_tab3_en').summernote('code','');
-                $('#des_tab4_en').summernote('code','');
-                $('#offer_en').summernote('code','');
-                $('.box_gallery').hide();
-                // $("#tag").val('').change();
-                // $("#tab").val('').change();
+
             })
 
             //load data edit
             $(document).on('click','.update',async function (e){
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = '{{url("/karppi/admin/food/detail")}}';
+                var url = '{{url("/karppi/admin/food-group/detail")}}';
                 // thông báo chờ
                 Show_wait_announce();
                 await $.ajax({
@@ -209,19 +178,14 @@
                         swal.close()
                         if(response.status == 0){
                             let data = response.data;
-                            let food = data.detail;
+                            let detail = data.detail;
 
                             // set dữ liệu tour
-                            $('#food_name').val(food.name);
-                            $('#price').val(food.price);
-                            $('#description').val(food.description);
-                            $('#food_category_id').val(food.category_id).change();
+                            $('#name').val(detail.name);
+                            $('#description').val(detail.description);
+                            $('#id').val(detail.id).change();
 
-
-
-
-
-                            $('#id').attr('value', food.id);
+                            $('#id').attr('value', detail.id);
                             $('#action').attr('value', 'update');
                             show_success_announce(300);
                         }else{

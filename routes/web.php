@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\bannerController;
 use App\Http\Controllers\admin\FoodController;
 use App\Http\Controllers\admin\blogController as AdminBlogController;
 use App\Http\Controllers\admin\categoriesController;
+use App\Http\Controllers\admin\FoodGroupController;
 use App\Http\Controllers\admin\galleryController;
 use App\Http\Controllers\admin\reviewController;
 use App\Http\Controllers\admin\tourController as AdminTourController;
@@ -44,7 +45,7 @@ route::group(['middleware' => 'checkLogin'],function(){
     route::prefix('/karppi/admin')->group(function(){
         route::get('/', [AdminController::class, 'home']);
 
-        // =============================== Quản lí menu food ================================
+        // =============================== Quản lí food ================================
         route::prefix('/food')->group(function () {
             route::get('/', [AdminController::class, 'food']);
             Route::post('/list', [FoodController::class, 'list']);
@@ -52,7 +53,17 @@ route::group(['middleware' => 'checkLogin'],function(){
             Route::post('/delete', [FoodController::class, 'delete']);
             Route::post('/detail', [FoodController::class, 'detail']);
         });
-        // =============================== quản lí tour ================================
+        // =============================== Quản lí food ================================
+
+        // ============================ Quản lí food Group =============================
+        route::prefix('/food-group')->group(function () {
+            route::get('/', [AdminController::class, 'foodGroup']);
+            Route::post('/list', [FoodGroupController::class, 'list']);
+            route::post('/create', [FoodGroupController::class, 'create']);
+            Route::post('/delete', [FoodGroupController::class, 'delete']);
+            Route::post('/detail', [FoodGroupController::class, 'detail']);
+        });
+        // ============================ Quản lí food Group =============================
 
         // =============================== quản lí tour ================================
         route::prefix('/quan-li-tour')->group(function(){

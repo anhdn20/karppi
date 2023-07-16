@@ -5,7 +5,7 @@
             margin-top: 0.4rem;
         }
     </style>
-    <x-headadmin title="Quản lí tour"></x-headadmin>
+    <x-headadmin title="Món ăn"></x-headadmin>
 
     @php
         $field = ['TT','Tên','Mô tả','Giá' ,'Nhóm' ,'#'];

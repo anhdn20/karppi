@@ -45,12 +45,12 @@ class AdminController extends Controller{
 
         return view('admin.food',compact('foodCategories'));
     }
-    public function tour(){
-        $categories = Category::where('type', 0)->where('is_deleted', 0)->get();
-        $tabs = Category::where('type', 2)->where('is_deleted', 0)->get();
 
-        return view('admin.tour',compact('categories','tabs'));
+    public function foodGroup()
+    {
+        return view('admin.foodGroup');
     }
+
     public function blog(){
         $categories = Category::where('is_deleted', 0)->where('type',1)->get();
         return view('admin.blog', compact('categories'));

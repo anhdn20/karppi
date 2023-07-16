@@ -15,7 +15,7 @@ class Food extends Model
     public function getList()
     {
         return self::select('food.id', 'food.name', 'food.description', 'food.price', 'C.name as category_name')
-            ->join('food_category as C', 'food.category_id', 'C.id')
+            ->leftJoin('food_category as C', 'food.category_id', 'C.id')
             ->where('food.is_deleted', 0)
             ->orderBy('food.updated_at')
             ->get();

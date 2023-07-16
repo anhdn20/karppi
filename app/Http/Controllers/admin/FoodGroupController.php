@@ -4,23 +4,19 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Food;
+use App\Models\FoodCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 
-class FoodController extends Controller
+class FoodGroupController extends Controller
 {
     public function list(){
-        $foodModel = new Food();
-        $foods = $foodModel->getList();
-        return Datatables::of($foods)
-            ->editColumn('category_name', function ($row) {
-                if (empty($row->category_name)) {
-                    return '<span class="badge badge-secondary">Chưa chọn</span>';
-                }
-                return '<span class="badge badge-success">'.$row->category_name.'</span>';
-            })
+        $category = new FoodCategory();
+        $data = $category->getList();
+        return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
                 return '<td>
@@ -46,16 +42,11 @@ class FoodController extends Controller
 
             // validation
             $validator = Validator::make($params, [
-                'food_name' => 'required|max:100',
-                'food_category_id' => 'required|numeric|max:1000',
-                'price' => 'required|numeric|max:1000000',
+                'name' => 'required|max:100',
                 'description' => 'max:1000',
             ],[
-                'food_name.required' => 'Chưa nhập tên món ăn',
-                'food_name.max' => 'Tên món anhw không được nhập dài quá 100 kí tự',
-                'food_category_id.required' => 'Chưa chọn danh mục món',
-                'price.numeric' => 'Không được nhập chữ ở giá',
-                'price.max' => 'Giá quá lớn',
+                'name.required' => 'Chưa nhập tên',
+                'name.max' => 'Tên món không được nhập dài quá 100 kí tự',
             ]);
 
             if($validator->fails()){
@@ -64,18 +55,16 @@ class FoodController extends Controller
 
             // chuẩn bị data insert bảng product
             $data = [
-                'category_id' => $params['food_category_id'],
-                'name' => $params['food_name'],
-                'price' => $params['price'],
+                'name' => $params['name'],
                 'description' => $params['description']
             ];
             if ($params['action'] == 'create') {
-                $result = Food::create($data);
+                $result = FoodCategory::create($data);
             } else {
-                $result = Food::where('is_deleted', 0)->where('id', $params['id'])->update($data);
+                $result = FoodCategory::where('is_deleted', 0)->where('id', $params['id'])->update($data);
             }
             if (!$result) {
-                throw new \Exception('Thêm món ăn thất bại');
+                throw new \Exception('Thêm thất bại');
             }
             return $outputSuccess;
         } catch (Exception $e) {
@@ -87,14 +76,9 @@ class FoodController extends Controller
         $params = $r->all(); //dang array
 
         // product detail
-        $data['detail'] = Food::where('id', $params['id'])->where('is_deleted', 0)->first();
+        $data['detail'] = FoodCategory::where('id', $params['id'])->where('is_deleted', 0)->first();
         $data['detail']->name = html_entity_decode($data['detail']->name);
         $data['detail']->description = html_entity_decode($data['detail']->description);
-        $data['detail']->category_id = html_entity_decode($data['detail']->category_id);
-        $data['detail']->price = html_entity_decode($data['detail']->price);
-
-        // lấy gallery
-        //$data['categories'] = FoodCategory::where('is_deleted', 0)->get();
 
         return ['status' => 0, 'data' => $data] ;
     }
@@ -102,14 +86,14 @@ class FoodController extends Controller
     public function delete(Request $r){
         $params = $r->all(); //dang array
         try {
-            $foodId = $params['id'];
-            // rev khỏi database
-            $result = Food::find($foodId)->update(['is_deleted' => 1]);
-            if (!$result) {
-                throw new \Exception('Delete fail');
-            }
+            $id = $params['id'];
+            DB::beginTransaction();
+            FoodCategory::find($id)->update(['is_deleted' => 1]);
+            Food::where('category_id', $id)->update(['category_id' => 0]);
+            DB::commit();
             return ['status' => 0];
         } catch (\Exception $e ) {
+            DB::rollBack();
             return ['status' => 1,'mess' => $e->getMessage()];
         }
     }

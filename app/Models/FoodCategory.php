@@ -12,5 +12,9 @@ class FoodCategory extends Model
         'name', 'description', 'is_deleted', 'image_url'
     ];
 
+    public function getlist()
+    {
+        return self::where('is_deleted', 0)->get();
+    }
 
 }
