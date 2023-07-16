@@ -93,6 +93,7 @@
         </div>
     </div>
 
+
     <script type="text/javascript">
          function setSuccessUpload(param){
             param.style.transition = '.5s';
@@ -112,6 +113,24 @@
         var FileArr2 = [];
         var FileArr3 = [];
         var FileArr4 = [];
+
+        var myDropzone = new Dropzone(".dropzone", {
+            maxFilesize: 3,
+            maxFiles: 1,
+            acceptedFiles: ".jpeg,.jpg,.png,.webp",
+            addRemoveLinks: true,
+            success: function(file, response){
+                FileArr1.push(response);
+
+                setSuccessUpload(file.previewElement.children[4]);
+
+            },
+            removedfile: function(file) {
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            }
+
+        });
 
         $(document).ready(function() {
             // tải dữ liệu lúc mới vào trang
