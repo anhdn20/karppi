@@ -156,7 +156,7 @@
             $(document).on('click','.del',function (e){
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = '{{url("/karppi/admin/quan-li-tour/xoa")}}';
+                var url = '{{url("/karppi/admin/food/delete")}}';
                 del(url,id);
             })
 
@@ -221,7 +221,7 @@
 
 
 
-                            $('#id').attr('value', tour.id);
+                            $('#id').attr('value', food.id);
                             $('#action').attr('value', 'update');
                             show_success_announce(300);
                         }else{

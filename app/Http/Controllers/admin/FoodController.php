@@ -4,12 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Food;
-use App\Models\FoodCategory;
-use App\Models\Tour;
-use App\Models\tourGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use mysql_xdevapi\Exception;
 use Yajra\DataTables\DataTables;
 
 
@@ -38,7 +34,8 @@ class FoodController extends Controller
             ->rawColumns(['action','category_name'])
             ->make(true);
     }
-    public function create(Request $r){
+    public function create(Request $r)
+    {
         $params = $r->all();
 
         try {
@@ -69,7 +66,11 @@ class FoodController extends Controller
                 'price' => $params['price'],
                 'description' => $params['description']
             ];
-            $result = Food::create($data);
+            if ($params['action'] == 'create') {
+                $result = Food::create($data);
+            } else {
+                $result = Food::where('is_deleted', 0)->where('id', $params['id'])->update($data);
+            }
             if (!$result) {
                 throw new \Exception('Thêm món ăn thất bại');
             }
@@ -78,7 +79,8 @@ class FoodController extends Controller
             return ['status' => 1,'mess' => $e->getMessage()];
         }
     }
-    public function detail(Request $r){
+    public function detail(Request $r)
+    {
         $params = $r->all(); //dang array
 
         // product detail
@@ -92,6 +94,21 @@ class FoodController extends Controller
         //$data['categories'] = FoodCategory::where('is_deleted', 0)->get();
 
         return ['status' => 0, 'data' => $data] ;
+    }
+
+    public function delete(Request $r){
+        $params = $r->all(); //dang array
+        try {
+            $foodId = $params['id'];
+            // rev khỏi database
+            $result = Food::find($foodId)->update(['is_deleted' => 1]);
+            if (!$result) {
+                throw new \Exception('Delete fail');
+            }
+            return ['status' => 0];
+        } catch (\Exception $e ) {
+            return ['status' => 1,'mess' => $e->getMessage()];
+        }
     }
 
 }
