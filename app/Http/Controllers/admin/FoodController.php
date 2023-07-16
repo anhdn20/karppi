@@ -42,7 +42,7 @@ class FoodController extends Controller
                             </div>
                        </td>';
             })
-            ->rawColumns(['action','category_name'])
+            ->rawColumns(['action','category_name','image_url'])
             ->make(true);
     }
     public function create(Request $r)
