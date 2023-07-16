@@ -8,7 +8,7 @@
     <x-headadmin title="Quản lí tour"></x-headadmin>
 
     @php
-        $field = ['TT','Tên','Mô tả','Giá' ,'Nhóm' ,'#'];
+        $field = ['TT','Tên','Mô tả','Giá' ,'Danh mục','#'];
     @endphp
 
     <x-table :field="$field"></x-table>
@@ -123,7 +123,7 @@
                 {data: 'category_name', name: 'Danh mục'},
                 {data: 'action', name: 'Hành Động'}
             ];
-            load_data_ajax_datatables("{{ url('/karppi/admin/food/list') }}",DataLoadFirst);
+            load_data_ajax_datatables("{{ url('/karppi/admin/data-food') }}",DataLoadFirst);
 
             //insert
             $('#insertData').click(function (e) {

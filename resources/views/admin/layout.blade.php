@@ -127,10 +127,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ asset('/karppi/admin/quan-li-danh-muc-tour') }}" class="nav-link">
+                <a href="{{ asset('/karppi/admin/food-group') }}" class="nav-link">
                     <i class="nav-icon fas fa-sticky-note"></i>
                     <p>
-                        Quản lí danh mục tour
+                        Food Group
                     </p>
                 </a>
             </li>

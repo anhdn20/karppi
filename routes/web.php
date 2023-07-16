@@ -47,12 +47,11 @@ route::group(['middleware' => 'checkLogin'],function(){
         // =============================== Quản lí menu food ================================
         route::prefix('/food')->group(function () {
             route::get('/', [AdminController::class, 'food']);
+            Route::post('/list', [FoodController::class, 'list']);
             route::post('/create', [FoodController::class, 'create']);
             Route::post('/delete', [FoodController::class, 'delete']);
             Route::post('/detail', [FoodController::class, 'detail']);
         });
-        Route::post('/data-food', [FoodController::class, 'list']);
-        Route::post('/tour-detail', [AdminTourController::class, 'detail']);
         // =============================== quản lí tour ================================
 
         // =============================== quản lí tour ================================
