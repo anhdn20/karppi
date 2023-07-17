@@ -150,14 +150,14 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ asset('/karppi/admin/quan-li-blog') }}" class="nav-link">
                     <i class="nav-icon fas fa-video"></i>
                     <p>
                         Quản lí blog
                     </p>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a href="{{ asset('/karppi/admin/quan-li-hinh-anh') }}" class="nav-link">
                     <i class="nav-icon fas fa-file-video"></i>

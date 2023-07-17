@@ -1,13 +1,23 @@
 @extends('site.layout')
 @section('content')
 
+@php
+    $image = asset('uploads/'.$bannerMenu->image??'');
+@endphp
+
+<style>
+    section.banner .banner::before{
+        background-image: url('<?php echo $image; ?>');
+    }
+</style>
+
 @if ($currentMenu != null)
     <section class="menuno13">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <h2>{{$currentMenu->name}}</h2>
-                    <p class="description">{{$currentMenu->description}}</p>
+                    <p class="description">{!! html_entity_decode($currentMenu->description) !!}</p>
                     <span class="owner">- GUSTAV</span>
                 </div>
             </div>

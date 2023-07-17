@@ -1,22 +1,31 @@
 @extends('site.layout')
 @section('content')
 
-<section class="intro">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9" data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-anchor-placement="top-bottom">
-                <img src="https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/1596454804680-C12K9P6592VOX6CPGV2V/Gustav_logo_valmis-16.png?format=1500w" alt="">
+
+@if ($bannerHead != null)
+    <section class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9" data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-anchor-placement="top-bottom">
+                    <a href="<?php $bannerHead->url_direction != null ? $bannerHead->url_direction : '#';?>">
+                        <img src="{{asset('uploads/'.$bannerHead->image)}}" alt="{{$bannerHead->title}}">
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 
 <section class="intro_2">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-left" data-aos-duration="1000" data-aos-easing="ease-in-out">
                 <div class="img">
-                    <img src="https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/1596443901479-D05TAVTOB86BK719TP91/Gustav_logo_valmis-04.png?format=1000w" alt="">
+                    @if ($bannerSection1 != null)
+                        <a href="<?php $bannerSection1->url_direction != null ? $bannerSection1->url_direction : '#';?>">
+                            <img src="{{asset('uploads/'.$bannerSection1->image)}}" alt="{{$bannerSection1->title}}">
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-right" data-aos-duration="1000" data-aos-easing="ease-in-out">
@@ -29,7 +38,11 @@
 
 <section class="banner_home">
     <div class="banner_home">
-        <img src="https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/1597047299722-VQS4YZ21MKKA9HH292B3/Gustav_rovaniemi_kuosi_KaisaKartela+copy.jpg?format=2500w" alt="" class="lazy">
+        @if ($bannerSection2 != null)
+            <a href="<?php $bannerSection2->url_direction != null ? $bannerSection2->url_direction : '#';?>">
+                <img src="{{asset('uploads/'.$bannerSection2->image)}}" alt="{{$bannerSection2->title}}" class="lazy">
+            </a>
+        @endif
     </div>
 </section>
 
@@ -46,7 +59,11 @@
 
 <section class="banner_home banner2">
     <div class="banner_home">
-        <img src="https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/1596814696018-JN7QP3YCOKUXZ471PBT2/Gustav_ravintola_rovaniemi_8.jpg?format=2500w" alt="" class="lazy">
+        @if ($bannerSection3 != null)
+            <a href="<?php $bannerSection3->url_direction != null ? $bannerSection3->url_direction : '#';?>">
+                <img src="{{asset('uploads/'.$bannerSection3->image)}}" alt="{{$bannerSection3->title}}" class="lazy">
+            </a>
+        @endif
     </div>
 </section>
 

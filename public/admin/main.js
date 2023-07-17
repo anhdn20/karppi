@@ -220,11 +220,6 @@ function show_success_announce(time = 1000) {
 $('.select2').select2()
 
 
-//Date picker
-$('.dateE').datetimepicker({
-    format: 'L'
-});
-
 $('#description_menu').summernote({
     fontNames: ['brother'],
     fontNamesIgnoreCheck: ['brother'],
@@ -235,23 +230,5 @@ $('#description_menu').summernote({
     focus: true                  // set focus to editable area after initializing summernote
 });
 
-// form repeater
-function repeaterFormat(classN){
-    $('.'+classN+'').repeater({
-        show: function () {
-            $(this).slideDown();
-            $(this).find('select').next('.select2-container').remove();
-            $('.select2').select2();
-        },
-        hide: function (deleteElement) {
-            console.log(deleteElement,classN);
-            if (confirm('Are you sure you want to delete this element?')) {
-            $(this).slideUp(deleteElement);
-            }
-        }
-    });
-}
-// repeaterFormat('repeater-default1');
-// repeaterFormat('repeater-default2');
-// repeaterFormat('repeater-default3');
+
 

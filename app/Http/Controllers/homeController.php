@@ -2,26 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Category;
-use App\Models\FoodCategory;
 use App\Models\FoodMenu;
 use App\Models\Gallery;
 use App\Models\Image;
-use App\Models\review;
-use App\Models\Tour;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 
 class homeController extends Controller
 {
 
     public function home(Request $r)
     {
+        // lấy tất cả các banner liên quan của trang home
+        $bannerHead = Image::getAllByType('BANNER_HOME_HEAD');
+        $bannerSection1 = Image::getAllByType('BANNER_HOME_SECTION_1');
+        $bannerSection2 = Image::getAllByType('BANNER_HOME_SECTION_2');
+        $bannerSection3 = Image::getAllByType('BANNER_HOME_SECTION_3');
 
-        return view('site.home');
+
+        return view('site.home',compact(
+            'bannerHead',
+            'bannerSection1',
+            'bannerSection2',
+            'bannerSection3'
+        ));
     }
 
     public function about(Request $r)
@@ -32,6 +35,8 @@ class homeController extends Controller
     public function menu(Request $r)
     {
 
+        $bannerMenu = Image::getAllByType('BANNER_MENU_SECTION');
+
         // lấy food menu hiện tại
         $currentMenu = FoodMenu::where('is_active',1)->first();
 
@@ -39,7 +44,7 @@ class homeController extends Controller
         // $categoryByCurrentMenu = FoodCategory::
 
 
-        return view('site.menu',compact('currentMenu'));
+        return view('site.menu',compact('currentMenu','bannerMenu'));
     }
 
     public function gallery(Request $r)

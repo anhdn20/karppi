@@ -52,20 +52,14 @@ class bannerController extends Controller
     public function store(Request $r){
         $params = $r->all(); //dang array
         try {
-            // validation
+            $outputSuccess = ['status' => 0,'mess' => 'Thành công'];
             // validation
             $validator = Validator::make($params, [
-                'title_vi' => 'required|max:200|unique:image,title_vi,'.$params['id'],
-                'title_en' => 'required|max:200|unique:image,title_en,'.$params['id'],
-                'type' => 'required|unique:image,type,'.$params['id']
+                'title' => 'max:200',
+                'type' => 'unique:image,type,'.$params['id']
             ],[
-                'title_vi.required' => 'Chưa nhập thông tin tiêu đề hình ảnh',
-                'title_vi.unique' => 'Trùng thông tin tiêu đề hình ảnh',
-                'title_vi.max' => 'không được nhập dài quá 200 kí tự',
-                'title_en.required' => 'Chưa nhập thông tin tiêu đề hình ảnh',
-                'title_en.unique' => 'Trùng thông tin tiêu đề hình ảnh',
-                'title_en.max' => 'không được nhập dài quá 200 kí tự',
-                'type.unique' => 'Ảnh ở vị trí này đã được tạo',
+                'title.max' => 'không được nhập dài quá 200 kí tự',
+                'type.unique' => 'Vị trí này đã được thêm rồi'
             ]);
 
             if($validator->fails()){
@@ -73,29 +67,13 @@ class bannerController extends Controller
             }
             // chuẩn bị data
             $data = [
-                'title_vi' => $params['title_vi'],
-                'title_en' => $params['title_en'],
+                'title' => $params['title'],
                 'type' => $params['type']
             ];
 
-            if(isset($params['sub_title_vi']) && $params['sub_title_vi'] != ''){
-                $data['sub_title_vi'] = $params['sub_title_vi'];
-            }
-
-            if(isset($params['sub_title_en']) && $params['sub_title_en'] != ''){
-                $data['sub_title_en'] = $params['sub_title_en'];
-            }
-
-            if(isset($params['text_btn_vi']) && $params['text_btn_vi'] != ''){
-                $data['text_btn_vi'] = $params['text_btn_vi'];
-            }
-
-            if(isset($params['text_btn_en']) && $params['text_btn_en'] != ''){
-                $data['text_btn_en'] = $params['text_btn_en'];
-            }
-
             if(isset($params['image']) && $params['image'] != ''){
                 $data['image'] = $params['image'];
+                $outputSuccess['type'] = 'reload';
             }
 
             if(isset($params['url_direction']) && $params['url_direction'] != ''){
@@ -106,13 +84,14 @@ class bannerController extends Controller
             if(isset($params['id']) && $params['id'] != 'undefined' && $params['action'] == 'update'){
                 // update vào database
                 Image::where('id',$params['id'])->update($data);
-                return ['status' => 0];
+                return $outputSuccess;
             }
             // add vào database
             Image::create($data);
 
-            return ['status' => 0,'mess' => $params];
+            return $outputSuccess;
         } catch (\Throwable $th) {
+            dd($th);
             return ['status' => 1,'mess' => $th];
         }
     }

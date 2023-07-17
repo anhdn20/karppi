@@ -153,7 +153,7 @@ section.banner .banner{
 section.banner .banner::before{
     position: absolute;
     content: '';
-    background-image: url('https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/2d734d1e-4043-48f7-8512-8050b3486c6c/1W4A0041.JPG?format=2500w');
+    /* background-image: url('https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/2d734d1e-4043-48f7-8512-8050b3486c6c/1W4A0041.JPG?format=2500w'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

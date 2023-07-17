@@ -28,13 +28,16 @@
   </head>
   <body>
     <header>
+        @php
+            $logo = \App\Models\Image::getAllByType('LOGO');
+        @endphp
         <div class="header">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
                         <div class="logo">
                             <a href="{{asset('/')}}">
-                                <img src="https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/762bda74-035d-4a6b-a3a3-4b38378e2287/Gustav_logo_valmis-19.png?format=1500w" alt="">
+                                <img src="{{asset('uploads/'.$logo->image)}}" alt="{{$logo->title}}">
                             </a>
                         </div>
                     </div>
@@ -68,7 +71,7 @@
             <div class="head">
                 <div class="logo">
                     <a href="{{asset('/')}}">
-                        <img src="https://images.squarespace-cdn.com/content/v1/5f27c5382d86017d07594cfc/762bda74-035d-4a6b-a3a3-4b38378e2287/Gustav_logo_valmis-19.png?format=1500w" alt="">
+                        <img src="{{asset('uploads/'.$logo->image)}}" alt="{{$logo->title}}">
                     </a>
                 </div>
             </div>
@@ -89,23 +92,23 @@
                             </a>
                         </li>
                         <li class="menu-nav-item">
-                            <a class="menu-nav-link" href="#">
+                            <a class="menu-nav-link" href="{{asset('/menu')}}">
                                 <span>
-                                    <div>About</div>
+                                    <div>MENU</div>
                                 </span>
                             </a>
                         </li>
                         <li class="menu-nav-item">
-                            <a class="menu-nav-link" href="#">
+                            <a class="menu-nav-link" href="{{asset('/gallery')}}">
                                 <span>
-                                    <div>Service</div>
+                                    <div>GALLERY</div>
                                 </span>
                             </a>
                         </li>
                         <li class="menu-nav-item">
-                            <a class="menu-nav-link" href="#">
+                            <a class="menu-nav-link" href="{{asset('/about-us')}}">
                                 <span>
-                                    <div>Team</div>
+                                    <div>ABOUT US</div>
                                 </span>
                             </a>
                         </li>

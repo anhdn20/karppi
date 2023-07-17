@@ -25,7 +25,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Tên hình ảnh</label>
-                                        <input name="title_vi" class="form-control" id="title_vi" placeholder="Nhập tên">
+                                        <input name="title" class="form-control" id="title" placeholder="Nhập tên">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -34,50 +34,17 @@
                                         <select class="form-control select2" id="type" name="type" style="width: 100%;">
                                                 <option value="LOGO">Logo</option>
                                                 <option value="BANNER_HOME_HEAD">Banner dưới header</option>
-                                                <option value="BANNER_HOME_SECTION">Banner nội dung home</option>
-                                                <option value="BANNER_CONTACT">Banner trang liên hệ</option>
-                                                <option value="BANNER_REVIEW">Banner trang review</option>
-                                                <option value="BANNER_BLOG">Banner trang blog</option>
-                                                <option value="BANNER_TOUR">Banner trang tour</option>
+                                                <option value="BANNER_HOME_SECTION_1">Banner nội dung home</option>
+                                                <option value="BANNER_HOME_SECTION_2">Banner hình ảnh home 1</option>
+                                                <option value="BANNER_HOME_SECTION_3">Banner hình ảnh home 2</option>
+                                                <option value="BANNER_MENU_SECTION">Banner trang menu</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Mô tả ngắn</label>
-                                        <input name="sub_title_vi" class="form-control" id="sub_title_vi" placeholder="Nhập tên">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Text button</label>
-                                        <input name="text_btn_vi" class="form-control" id="text_btn_vi" placeholder="Nhập tên">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Điều hướng</label>
+                                        <label for="exampleInputEmail1">Điều hướng (Nếu cần)</label>
                                         <input type="text" name="url_direction" class="form-control" id="url_direction" placeholder="Nhập url">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-5">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Tên hình ảnh (en)</label>
-                                        <input name="title_en" class="form-control" id="title_en" placeholder="Nhập tên">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Text button (en)</label>
-                                        <input name="text_btn_en" class="form-control" id="text_btn_en" placeholder="Nhập tên">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Mô tả ngắn (en)</label>
-                                        <input name="sub_title_en" class="form-control" id="sub_title_en" placeholder="Nhập tên">
                                     </div>
                                 </div>
                             </div>
@@ -147,12 +114,12 @@
             // tải dữ liệu lúc mới vào trang
             let DataLoadFirst = [
                 {data: 'id', name: 'Thứ tự'},
-                {data: 'title_vi', name: 'Tên'},
+                {data: 'title', name: 'Tên'},
                 {data: 'type', name: 'Loại Image'},
                 {data: 'image', name: 'Ảnh'},
                 {data: 'action', name: 'Hành Động'},
             ];
-            load_data_ajax_datatables("{{ url('/cludmed/admin/data-banner') }}",DataLoadFirst);
+            load_data_ajax_datatables("{{ url('/karppi/admin/data-banner') }}",DataLoadFirst);
 
             //insert
             $('#insertData').click(function (e) {
@@ -168,7 +135,7 @@
                 var dataForm = $('#dataForm').serialize();
                 dataForm += '&image=' + image;
 
-                var url = '{{url("/cludmed/admin/quan-li-hinh-anh/them")}}';
+                var url = '{{url("/karppi/admin/quan-li-hinh-anh/them")}}';
                 insert(url,dataForm);
             })
 
@@ -177,7 +144,7 @@
                 e.preventDefault();
                 var id = $(this).data('id');
                 console.log(id);
-                var url = '{{url("/cludmed/admin/quan-li-hinh-anh/xoa")}}';
+                var url = '{{url("/karppi/admin/quan-li-hinh-anh/xoa")}}';
                 del(url,id);
             })
 
@@ -195,7 +162,7 @@
                 // myDropzone.removeAllFiles(true);
 
                 var id = $(this).data('id');
-                var url = '{{url("/cludmed/admin/banner-detail")}}';
+                var url = '{{url("/karppi/admin/banner-detail")}}';
                 // thông báo chờ
                 Show_wait_announce();
                 await $.ajax({
