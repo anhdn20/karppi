@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th7 15, 2023 lúc 11:02 AM
+-- Thời gian đã tạo: Th7 17, 2023 lúc 03:29 PM
 -- Phiên bản máy phục vụ: 5.7.33
--- Phiên bản PHP: 7.4.19
+-- Phiên bản PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,38 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `cludmed`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `config`
+--
+
+CREATE TABLE `config` (
+  `id` int(11) NOT NULL,
+  `key_config` enum('ADDRESS','HOME_TITLE_SECTION','HOME_DESCRIPTION_SECTION','URL_FACEBOOK','URL_INSTAGRAM','HOME_QUOTE_1','HOME_QUOTE_2','EMAIL','PHONE','IFRAME_MAP','RESTAURANT','URL_REDIRECT_MAP') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `value` text COLLATE utf8_unicode_ci,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `config`
+--
+
+INSERT INTO `config` (`id`, `key_config`, `value`, `created_at`, `updated_at`) VALUES
+(1, 'ADDRESS', 'KOSKIKATU 12 96200 ROVANIEMI 1', NULL, '2023-07-17 21:54:51'),
+(2, 'HOME_TITLE_SECTION', 'GUSTAV, THE WANDERER', NULL, NULL),
+(3, 'HOME_DESCRIPTION_SECTION', 'Mr. Gustav is a gentle grandfather, whose beard tickles as he hugs. He never says no for angling with his grandchildren and encourages them for yet another pancake. Gustav had a soul of a wanderer already way before travelling became somewhat fashionable. His voyages have made him quite a storyteller, and from the travels he always returned with a chest full of recipes. The passing days have not faded Gustav’s curiosity for globetrotting, even if made him more composed. A delightful drink, scrumptious food and beloved people around are what truly matters to Gustav. Therefore, he joyfully puts great effort into creating delicacies to his pals, generated with decades of uncompromising experience.', NULL, NULL),
+(4, 'URL_FACEBOOK', '#', NULL, NULL),
+(5, 'URL_INSTAGRAM', '#', NULL, NULL),
+(6, 'HOME_QUOTE_1', '“FOOD PREPARED WITH SIMPLE BUT HIGH-QUALITY INGREDIENTS IS FASHIONABLE, ALWAYS AND EVERYWHERE. THAT’S WHAT I LEARNT DURING MY JOURNEYS.”', NULL, NULL),
+(7, 'HOME_QUOTE_2', '“THE TRUE VIRTUE OF COOKING IS CURIOUSITY.”', NULL, NULL),
+(8, 'EMAIL', 'INFO@GUSTAVKITCHENBAR.FI', NULL, NULL),
+(9, 'PHONE', '+358 400 421244', NULL, NULL),
+(10, 'RESTAURANT', 'Karppi', NULL, NULL),
+(11, 'IFRAME_MAP', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d251433.92538431016!2d105.47473429453122!3d10.045294399999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a08802e47b3083%3A0x5b6e5a03285c9576!2zVmluY29tIFBsYXphIEjDuW5nIFbGsMahbmc!5e0!3m2!1svi!2s!4v1685022180928!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', NULL, NULL),
+(12, 'URL_REDIRECT_MAP', 'https://www.google.com/maps/@9.7598942,105.6044849,12z?hl=vi-VN&entry=ttu', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -79,35 +111,26 @@ INSERT INTO `food_category` (`id`, `name`, `description`, `image_url`, `is_delet
 -- Cấu trúc bảng cho bảng `food_menu`
 --
 
-# Dump of table food_menu
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `food_menu`;
-
 CREATE TABLE `food_menu` (
-                             `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-                             `name` varchar(255) DEFAULT NULL,
-                             `intro` text DEFAULT NULL,
-                             `description` text DEFAULT NULL,
-                             `is_deleted` tinyint(11) DEFAULT 0,
-                             `image_url` varchar(255) DEFAULT NULL,
-                             `is_active` tinyint(4) DEFAULT 0,
-                             `created_at` datetime DEFAULT current_timestamp(),
-                             `updated_at` datetime DEFAULT current_timestamp(),
-                             PRIMARY KEY (`id`)
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `intro` text,
+  `description` text,
+  `is_deleted` tinyint(11) DEFAULT '0',
+  `image_url` varchar(255) DEFAULT NULL,
+  `is_active` tinyint(4) DEFAULT '0',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-LOCK TABLES `food_menu` WRITE;
-/*!40000 ALTER TABLE `food_menu` DISABLE KEYS */;
+--
+-- Đang đổ dữ liệu cho bảng `food_menu`
+--
 
-INSERT INTO `food_menu` (`id`, `name`, `intro`, `description`, `is_deleted`, `image_url`, `is_active`, `created_at`, `updated_at`)
-VALUES
-    (1,'MENU NO.13',NULL,'“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD \r\n AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”\r\n\r\n- GUSTAV',0,'cloud30_2023-07-16-21.png',0,'0000-00-00 00:00:00','2023-07-17 13:24:18'),
-    (2,'Menu mua',NULL,'<p><span style=\"color: rgb(43, 34, 33); font-family: brother-1816; font-size: 18px; letter-spacing: 1.7472px; text-align: center; text-transform: uppercase; white-space-collapse: preserve; background-color: rgb(219, 218, 214);\">“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”</span></p>',0,'cloud30_2023-07-16-21.png',0,'2023-07-16 20:40:43','2023-07-17 13:24:18'),
-    (3,'Menu muaf xuan','THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH','<h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin-right: 0px; margin-bottom: 15px; margin-left: 0px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">KNUT BREAD BAKED FROM GUSTAV’S SOURDOUGH</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">The Knut bread is named after Gustav’s grandfather and refers to a hot dish following the original recipe. Knut believed that great bread (and moustaches) makes a man. This sourdough Knut reminds Gustav of childhood moments spent with his grandfather. Way back then, the table was always set with fresh bread and toasted butter, which was one of grandfather’s special culinary delights. This speciality was actually created by accident, as a saucepan with butter was left on the stove for a little too long. The same favourable forgetfulness runs in Gustav’s genes and is evident in his cuisine.</p><h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin: 2rem 0px 15px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">TO ACCOMPANY THE BREAD</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Wild garlic cream cheese (LF,GF)  5€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Feta spread (LF,GF) 6€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Chicken liver mousse and pear and port wine jam (LF,GF) 8€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Cold cuts from southern Europe (MF,GF) 11€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Selection of cheeses with compote of the day (GF)  11€</p>',0,'cloud14_2023-07-16-21.png',1,'2023-07-16 20:40:56','2023-07-17 13:24:18');
-
-/*!40000 ALTER TABLE `food_menu` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `food_menu` (`id`, `name`, `intro`, `description`, `is_deleted`, `image_url`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'MENU NO.13', NULL, '“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD \r\n AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”\r\n\r\n- GUSTAV', 0, 'cloud30_2023-07-16-21.png', 0, '0000-00-00 00:00:00', '2023-07-17 13:24:18'),
+(2, 'Menu mua', NULL, '<p><span style=\"color: rgb(43, 34, 33); font-family: brother-1816; font-size: 18px; letter-spacing: 1.7472px; text-align: center; text-transform: uppercase; white-space-collapse: preserve; background-color: rgb(219, 218, 214);\">“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”</span></p>', 0, 'cloud30_2023-07-16-21.png', 0, '2023-07-16 20:40:43', '2023-07-17 13:24:18'),
+(3, 'Menu muaf xuan', 'THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH', '<h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin-right: 0px; margin-bottom: 15px; margin-left: 0px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">KNUT BREAD BAKED FROM GUSTAV’S SOURDOUGH</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">The Knut bread is named after Gustav’s grandfather and refers to a hot dish following the original recipe. Knut believed that great bread (and moustaches) makes a man. This sourdough Knut reminds Gustav of childhood moments spent with his grandfather. Way back then, the table was always set with fresh bread and toasted butter, which was one of grandfather’s special culinary delights. This speciality was actually created by accident, as a saucepan with butter was left on the stove for a little too long. The same favourable forgetfulness runs in Gustav’s genes and is evident in his cuisine.</p><h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin: 2rem 0px 15px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">TO ACCOMPANY THE BREAD</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Wild garlic cream cheese (LF,GF)  5€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Feta spread (LF,GF) 6€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Chicken liver mousse and pear and port wine jam (LF,GF) 8€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Cold cuts from southern Europe (MF,GF) 11€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Selection of cheeses with compote of the day (GF)  11€</p>', 0, 'cloud14_2023-07-16-21.png', 1, '2023-07-16 20:40:56', '2023-07-17 13:24:18');
 
 -- --------------------------------------------------------
 
@@ -167,6 +190,35 @@ INSERT INTO `gallery` (`id`, `title`, `image`, `url`, `type`, `priority`, `is_de
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `image`
+--
+
+CREATE TABLE `image` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url_direction` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` enum('LOGO','BANNER_HOME_HEAD','BANNER_HOME_SECTION_1','BANNER_HOME_SECTION_2','BANNER_HOME_SECTION_3','BANNER_MENU_SECTION') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `image`
+--
+
+INSERT INTO `image` (`id`, `title`, `image`, `url_direction`, `type`, `is_deleted`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Gustav_logo_valmis-19_2023-07-17-21.png', NULL, 'LOGO', 0, '2023-07-17 21:05:32', '2023-07-17 21:07:42'),
+(2, NULL, 'Gustav_logo_valmis-16_2023-07-17-21.png', NULL, 'BANNER_HOME_HEAD', 0, '2023-07-17 21:08:44', '2023-07-17 21:08:44'),
+(3, NULL, 'Gustav_logo_valmis-04_2023-07-17-21.png', NULL, 'BANNER_HOME_SECTION_1', 0, '2023-07-17 21:08:53', '2023-07-17 21:08:53'),
+(4, NULL, 'asd_2023-07-17-21.jpg', NULL, 'BANNER_HOME_SECTION_2', 0, '2023-07-17 21:09:06', '2023-07-17 21:28:47'),
+(5, NULL, 'Gustav_ravintola_rovaniemi_8_2023-07-17-21.jpg', NULL, 'BANNER_HOME_SECTION_3', 0, '2023-07-17 21:09:16', '2023-07-17 21:09:16'),
+(6, NULL, '1W4A0041_2023-07-17-21.jpg', NULL, 'BANNER_MENU_SECTION', 0, '2023-07-17 21:10:06', '2023-07-17 21:10:06');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `users`
 --
 
@@ -191,6 +243,12 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `created_at`, `upda
 --
 
 --
+-- Chỉ mục cho bảng `config`
+--
+ALTER TABLE `config`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `food`
 --
 ALTER TABLE `food`
@@ -209,21 +267,9 @@ ALTER TABLE `food_menu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `food_menu_relation`
+-- Chỉ mục cho bảng `image`
 --
-ALTER TABLE `food_menu_relation`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `gallery`
---
-ALTER TABLE `gallery`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `users`
---
-ALTER TABLE `users`
+ALTER TABLE `image`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -231,40 +277,22 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT cho bảng `food`
+-- AUTO_INCREMENT cho bảng `config`
 --
-ALTER TABLE `food`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT cho bảng `food_category`
---
-ALTER TABLE `food_category`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `config`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `food_menu`
 --
 ALTER TABLE `food_menu`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `food_menu_relation`
+-- AUTO_INCREMENT cho bảng `image`
 --
-ALTER TABLE `food_menu_relation`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `gallery`
---
-ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT cho bảng `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `image`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
