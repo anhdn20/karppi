@@ -29,8 +29,12 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-right" data-aos-duration="1000" data-aos-easing="ease-in-out">
-                <h3>GUSTAV, THE WANDERER</h3>
-                <p>Mr. Gustav is a gentle grandfather, whose beard tickles as he hugs. He never says no for angling with his grandchildren and encourages them for yet another pancake. Gustav had a soul of a wanderer already way before travelling became somewhat fashionable. His voyages have made him quite a storyteller, and from the travels he always returned with a chest full of recipes. The passing days have not faded Gustav’s curiosity for globetrotting, even if made him more composed. A delightful drink, scrumptious food and beloved people around are what truly matters to Gustav. Therefore, he joyfully puts great effort into creating delicacies to his pals, generated with decades of uncompromising experience.</p>
+                @php
+                    $titlene = \App\Models\Config::getByKey('HOME_TITLE_SECTION');
+                    $descne = \App\Models\Config::getByKey('HOME_DESCRIPTION_SECTION');
+                @endphp
+                <h3><?=$titlene->value??''?></h3>
+                <p><?=$descne->value??''?></p>
             </div>
         </div>
     </div>
@@ -50,7 +54,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg12 col-md12 col-sm-12" data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out">
-                <h3>“FOOD PREPARED WITH SIMPLE BUT HIGH-QUALITY INGREDIENTS IS FASHIONABLE, ALWAYS AND EVERYWHERE. THAT’S WHAT I LEARNT DURING MY JOURNEYS.”</h3>
+                @php
+                    $quote1 = \App\Models\Config::getByKey('HOME_QUOTE_1');
+                @endphp
+                <h3><?=$quote1->value??''?></h3>
                 <p>— GUSTAV</p>
             </div>
         </div>
@@ -71,7 +78,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg12 col-md12 col-sm-12" data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out">
-                <h3>“THE TRUE VIRTUE OF COOKING IS CURIOUSITY.”</h3>
+                @php
+                    $quote2 = \App\Models\Config::getByKey('HOME_QUOTE_2');
+                @endphp
+                <h3><?=$quote2->value??''?></h3>
                 <p>— GUSTAV</p>
             </div>
         </div>

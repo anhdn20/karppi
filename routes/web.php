@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\bannerController;
 use App\Http\Controllers\admin\blogController as AdminBlogController;
 use App\Http\Controllers\admin\categoriesController;
+use App\Http\Controllers\admin\ConfigController;
 use App\Http\Controllers\admin\FoodController;
 use App\Http\Controllers\admin\FoodGroupController;
 use App\Http\Controllers\admin\FoodMenuController;
@@ -77,39 +78,6 @@ route::group(['middleware' => 'checkLogin'],function(){
         // ============================ Quản lí food Group =============================
 
 
-        // =============================== quản lí user ================================
-        route::prefix('/quan-li-nguoi-dung')->group(function(){
-            route::get('/', [AdminController::class, 'user']);
-            route::post('/them', [userController::class, 'store']);
-            Route::post('/xoa', [userController::class, 'delete']);
-        });
-        Route::post('/data-user', [userController::class, 'list']);
-        Route::post('/user-detail', [userController::class, 'detail']);
-        // =============================== quản lí user ================================
-
-
-
-        // =============================== quản lí danh mục ================================
-        route::prefix('/quan-li-danh-muc-blog')->group(function(){
-            route::get('/', [AdminController::class, 'categoryBlog']);
-            route::post('/them', [categoriesController::class, 'store']);
-            Route::post('/xoa', [categoriesController::class, 'delete']);
-        });
-        Route::post('/data-categories-blog', [categoriesController::class, 'listBlog']);
-        Route::post('/categories-detail-blog', [categoriesController::class, 'detail']);
-        // =============================== quản lí danh mục ================================
-
-        // =============================== quản lí danh mục ================================
-        route::prefix('/quan-li-danh-muc-tour')->group(function(){
-            route::get('/', [AdminController::class, 'categoryTour']);
-            route::post('/them', [categoriesController::class, 'store']);
-            Route::post('/xoa', [categoriesController::class, 'delete']);
-        });
-        Route::post('/data-categories', [categoriesController::class, 'listTour']);
-        Route::post('/categories-detail', [categoriesController::class, 'detail']);
-        // =============================== quản lí danh mục ================================
-
-
         // =============================== quản lí banner ================================
         route::prefix('/quan-li-hinh-anh')->group(function(){
             route::get('/', [AdminController::class, 'banner']);
@@ -121,7 +89,7 @@ route::group(['middleware' => 'checkLogin'],function(){
         // =============================== quản lí banner ================================
 
 
-        // =============================== quản lí đánh giá ================================
+        // =============================== quản lí gallery ================================
         route::prefix('/gallery')->group(function(){
             route::get('/', [AdminController::class, 'gallery']);
             route::post('/them', [galleryController::class, 'store']);
@@ -129,18 +97,17 @@ route::group(['middleware' => 'checkLogin'],function(){
         });
         Route::post('/data-gallery', [galleryController::class, 'list']);
         Route::post('/gallery-detail', [galleryController::class, 'detail']);
-        // =============================== quản lí đánh giá ================================
+        // =============================== quản lí gallery ================================
 
-
-        // =============================== quản lí studio ================================
-        route::prefix('/quan-li-blog')->group(function(){
-            route::get('/', [AdminController::class, 'blog']);
-            route::post('/them', [AdminBlogController::class, 'store']);
-            Route::post('/xoa', [AdminBlogController::class, 'delete']);
+           // =============================== quản lí cấu hình chung ================================
+        route::prefix('/quan-li-config')->group(function(){
+            route::get('/', [adminController::class, 'config']);
+            route::post('/them', [ConfigController::class, 'store']);
         });
-        Route::post('/data-blog', [AdminBlogController::class, 'list']);
-        Route::post('/blog-detail', [AdminBlogController::class, 'detail']);
-        // =============================== quản lí blog ================================
+        Route::post('/data-config', [ConfigController::class, 'list']);
+        Route::post('/config-detail', [ConfigController::class, 'detail']);
+            // =============================== quản lí cấu hình chung ================================
+
 
     });
 });

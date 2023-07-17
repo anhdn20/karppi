@@ -30,6 +30,8 @@
     <header>
         @php
             $logo = \App\Models\Image::getAllByType('LOGO');
+            $urlFb = \App\Models\Config::getByKey('URL_FACEBOOK');
+            $urlInsta = \App\Models\Config::getByKey('URL_INSTAGRAM');
         @endphp
         <div class="header">
             <div class="container">
@@ -57,10 +59,10 @@
                     <div class="col-lg-4 col-md-4">
                         <ul class="social">
                             <li>
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="<?=$urlFb->value??''?>"><i class="fab fa-facebook-f"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="<?=$urlInsta->value??''?>"><i class="fab fa-instagram"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -115,8 +117,8 @@
                     </ul>
                     <div class="gallery">
                         <div class="images">
-                            <a href="#" class="image-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="image-link"><i class="fab fa-instagram"></i></a>
+                            <a href="<?=$urlFb->value??''?>" class="image-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="<?=$urlInsta->value??''?>" class="image-link"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -136,12 +138,18 @@
 
     </div>
     <footer>
+        @php
+            $address = \App\Models\Config::getByKey('ADDRESS');
+            $urlMap = \App\Models\Config::getByKey('URL_REDIRECT_MAP');
+            $email = \App\Models\Config::getByKey('EMAIL');
+            $phone = \App\Models\Config::getByKey('PHONE');
+        @endphp
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 welcome">
                     <div class="top">
                         <h3>WELCOME!</h3>
-                        <a href="#">KOSKIKATU 12 96200 ROVANIEMI</a>
+                        <a href="<?=$urlMap->value??'3'?>" target="blank"><?=$address->value??''?></a>
                     </div>
                     <div class="bottom">
                         <h3>FOOD</h3>
@@ -160,8 +168,8 @@
                 </div>
                 <div class="col-lg-4">
                     <h3>YHTEYS / CONTACT</h3>
-                    <p>INFO@GUSTAVKITCHENBAR.FI <br>
-                        +358 400 421244</p>
+                    <p><?=$email->value??''?> <br>
+                        <?=$phone->value??''?></p>
                 </div>
             </div>
         </div>

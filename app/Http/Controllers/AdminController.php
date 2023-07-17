@@ -84,6 +84,9 @@ class AdminController extends Controller{
         return view('admin.gallery');
     }
 
+    public function config(){
+        return view('admin.config');
+    }
 
 
 }

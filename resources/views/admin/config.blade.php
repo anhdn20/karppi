@@ -1,9 +1,17 @@
 @extends('admin.layout')
 @section('content')
-    <x-headadmin title="Quản lí người dùng"></x-headadmin>
+    <x-headadmin title="Cấu hình chung"></x-headadmin>
+    <style>
+        .content-header #modalAddNew{
+            display: none;
+        }
+        thead tr th:nth-child(3){
+            max-width: 500px;
+        }
+    </style>
 
     @php
-        $field = ['TT','Email','Họ và tên','#'];
+        $field = ['TT','Key','#'];
     @endphp
 
     <x-table :field="$field"></x-table>
@@ -14,7 +22,7 @@
                 <form action="" method="POST" id="dataForm">
                     @csrf
                     <div class="modal-header">
-                        <h4 class="modal-title">Thêm/chỉnh sửa người dùng</h4>
+                        <h4 class="modal-title">Chỉnh sửa cấu hình</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -22,16 +30,8 @@
                     <div class="modal-body">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Email</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Tên người dùng</label>
-                                    <input name="name" class="form-control" id="name" placeholder="Tên người dùng">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Mật khẩu (Chỉ nhập khi tạo mới hoặc muốn thay đổi)</label>
-                                    <input name="password" class="form-control" id="password" placeholder="Mật khẩu">
+                                    <label for="exampleInputPassword1">Giá trị</label>
+                                    <input type="text" name="value" class="form-control" id="value" placeholder="">
                                 </div>
                             </div>
                             <input type="hidden" name="id" id="id" value="">
@@ -50,11 +50,11 @@
             // tải dữ liệu lúc mới vào trang
             let DataLoadFirst = [
                 {data: 'id', name: 'Thứ tự'},
-                {data: 'email', name: 'Email'},
-                {data: 'name', name: 'Họ và tên'},
+                {data: 'key_config', name: 'Email'},
+                // {data: 'value', name: 'Họ và tên'},
                 {data: 'action', name: 'Hành Động'},
             ];
-            load_data_ajax_datatables("{{ url('/wonlico/admin/data-user') }}",DataLoadFirst);
+            load_data_ajax_datatables("{{ url('/karppi/admin/data-config') }}",DataLoadFirst);
 
             //insert
             $('#insertData').click(function (e) {
@@ -68,30 +68,15 @@
                 }
                 var dataForm = $('#dataForm').serialize();
 
-                var url = '{{url("/wonlico/admin/quan-li-nguoi-dung/them")}}';
+                var url = '{{url("/karppi/admin/quan-li-config/them")}}';
                 insert(url,dataForm);
-            })
-
-            //xóa
-            $(document).on('click','.del',function (e){
-                e.preventDefault();
-                var id = $(this).data('id');
-                var url = '{{url("/wonlico/admin/quan-li-nguoi-dung/xoa")}}';
-                del(url,id);
-            })
-
-            // set action cho button
-            $(document).on('click','#modalAddNew',async function (e){
-                $('#action').attr('value', 'create');
-                // reset lại form cho tạo mới
-                $("#dataForm")[0].reset()
             })
 
             //load data edit
             $(document).on('click','.update',async function (e){
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = '{{url("/wonlico/admin/user-detail")}}';
+                var url = '{{url("/karppi/admin/config-detail")}}';
                 // thông báo chờ
                 Show_wait_announce();
                 await $.ajax({
@@ -106,11 +91,10 @@
                         swal.close()
                         if(response.status == 0){
                             let data = response.data;
-                            $('#name').val(data.full_name);
-                            $('#email').val(data.email);
+                            $('#value').val(data.value);
                             $('#id').attr('value', data.id);
                             $('#action').attr('value', 'update');
-                            show_success_announce(300);
+                            // show_success_announce(300);
                         }else{
                             show_fail_announce(response.mess)
                         }
