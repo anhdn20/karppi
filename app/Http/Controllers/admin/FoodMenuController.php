@@ -22,7 +22,7 @@ class FoodMenuController extends Controller
                 $isCheck =  $row->is_active == 1 ? 'checked' : '';
                 return '<div class="form-group">
                     <label class="toggle-switch">
-                        <input type="checkbox" id="is_active" name="is_active" '.$isCheck.' >
+                        <input type="checkbox" id="is_active" value="'.$row->id.'" name="is_active" '.$isCheck.' >
                         <span class="slider"></span>
                     </label>
                 </div>';
@@ -74,21 +74,15 @@ class FoodMenuController extends Controller
             if($validator->fails()){
                 return ['status' => 1,'mess' => $validator->errors()->first()];
             }
-            $isActive = $params['is_active'] ?? 0;
             // chuẩn bị data insert bảng product
             $data = [
                 'name' => $params['name'],
                 'description' => $params['description'],
-                'is_active' => $isActive
             ];
             if (!empty($params['image'])) {
                 $data['image_url'] = $params['image'];
             }
             DB::beginTransaction();
-            if ($isActive == 1) {
-                //chỉ được 1 row active
-                FoodMenu::select()->update(['is_active' => 0]);
-            }
             if ($params['action'] == 'create') {
                 $result = FoodMenu::create($data);
             } else {
@@ -117,6 +111,29 @@ class FoodMenuController extends Controller
         return ['status' => 0, 'data' => $data] ;
     }
 
+    public function active(Request $r)
+    {
+        $params = $r->all();
+        $isActive = $params['is_active'] ?? 0;
+        $id = $params['id'];
+        try {
+            DB::beginTransaction();
+            if ($isActive == 1) {
+                //chỉ được 1 row active
+                FoodMenu::select()->update(['is_active' => 0]);
+            }
+            $data = [
+                'is_active' => $isActive
+            ];
+            FoodMenu::where('id', $id)->update($data);
+            DB::commit();
+            return ['status' => 0];
+
+        } catch (\Exception $e ) {
+            DB::rollBack();
+            return ['status' => 1,'mess' => $e->getMessage()];
+        }
+    }
     public function delete(Request $r){
         $params = $r->all(); //dang array
         try {

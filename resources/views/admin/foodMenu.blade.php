@@ -225,6 +225,7 @@
 
 
 
+
             // set action cho button
             $(document).on('click','#modalAddNew',async function (e){
                 $('#action').attr('value', 'create');
@@ -258,13 +259,7 @@
                             $('#image').attr('src', menuDetail.image_url);
                             $('#id').attr('value', menuDetail.id);
                             $('#action').attr('value', 'update');
-                            $("#is_active").val(menuDetail.is_active);
 
-                            if (menuDetail.is_active == 1) {
-                                $("#is_active").prop("checked", true);
-                            } else {
-                                $("#is_active").prop("checked", false);
-                            }
                             show_success_announce(300);
                         }else{
                             show_fail_announce(response.mess)
@@ -273,18 +268,33 @@
                 });
             })
 
-            document.getElementById("is_active").addEventListener("change", function() {
+            $(document).on('click','#is_active',function (e){
                 // Get the checkbox state (checked or not checked)
-                var isChecked = this.checked;
+                var isActive = this.checked ? 1 : 0;
 
-                // Do something based on the checkbox state (e.g., update settings, show/hide content, etc.)
-                if (isChecked) {
-                    $("#is_active").val(1);
-                // Perform actions for when the toggle is ON
-                } else {
-                    $("#is_active").val(0);
-                // Perform actions for when the toggle is OFF
-                }
+
+                $("#is_active").val(isActive)
+                var url = '{{url("/karppi/admin/food-menu/active")}}';
+                Show_wait_announce
+                $.ajax({
+                    url:url,
+                    type:"POST",
+                    data: {
+                        id : $(this).val(),
+                        is_active: isActive,
+                        _token : $('input[name="_token"]').val()
+                    },
+                    success:async function(response){
+                        // đóng thông báo chờ
+                        swal.close()
+                        if(response.status == 0){
+                            $('#datatable').DataTable().ajax.reload();
+                            show_success_announce();
+                        }else{
+                            show_fail_announce(response.mess)
+                        }
+                    }
+                });
             });
         });
     </script>

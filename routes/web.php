@@ -71,6 +71,7 @@ route::group(['middleware' => 'checkLogin'],function(){
             Route::post('/list', [FoodMenuController::class, 'list']);
             route::post('/create', [FoodMenuController::class, 'create']);
             Route::post('/delete', [FoodMenuController::class, 'delete']);
+            Route::post('/active', [FoodMenuController::class, 'active']);
             Route::post('/detail', [FoodMenuController::class, 'detail']);
         });
         // ============================ Quản lí food Group =============================
