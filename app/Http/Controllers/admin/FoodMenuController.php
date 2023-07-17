@@ -51,7 +51,7 @@ class FoodMenuController extends Controller
                             </div>
                        </td>';
             })
-            ->rawColumns(['action','is_active', 'image_url'])
+            ->rawColumns(['action', 'intro', 'description', 'is_active', 'image_url'])
             ->make(true);
     }
     public function create(Request $r)
@@ -64,11 +64,8 @@ class FoodMenuController extends Controller
             // validation
             $validator = Validator::make($params, [
                 'name' => 'required|max:100',
-                'description' => 'max:1000',
             ],[
                 'name.required' => 'Chưa nhập tên món ăn',
-                'name.max' => 'Tên món anhw không được nhập dài quá 100 kí tự',
-                'description.max' => 'Mô tả không được nhập quá 1000 ký tự',
             ]);
 
             if($validator->fails()){
@@ -78,6 +75,7 @@ class FoodMenuController extends Controller
             $data = [
                 'name' => $params['name'],
                 'description' => $params['description'],
+                'intro' => $params['intro'],
             ];
             if (!empty($params['image'])) {
                 $data['image_url'] = $params['image'];

@@ -74,7 +74,7 @@
     <x-headadmin title="Món ăn"></x-headadmin>
 
     @php
-        $field = ['TT', 'Hình ảnh', 'Tên', 'Mô tả', 'Trạng thái', '#'];
+        $field = ['TT', 'Hình ảnh', 'Tên', 'Lời giới thiệu', 'Nội dung mô tả', 'Trạng thái', '#'];
     @endphp
 
     <x-table :field="$field"></x-table>
@@ -111,11 +111,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-12">
                                                 <div class="form-group">
+                                                    <label for="exampleInputPassword1">Lời giới thiệu</label>
+                                                    <textarea name="intro" class="form-control" id="intro" placeholder="Nhập lời giới thiệu"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group" >
                                                     <label for="exampleInputPassword1">Mô tả</label>
-                                                    <textarea name="description" class="form-control" id="description" placeholder="Nhập mô tả"></textarea>
+                                                    <textarea name="description" class="form-control" id="description_menu" placeholder="Nhập mô tả"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,6 +195,7 @@
                 {data: 'id', name: 'Thứ tự'},
                 {data: 'image_url', name: 'Hình ảnh'},
                 {data: 'name', name: 'Tên'},
+                {data: 'intro', name: 'Lời giới thiệu'},
                 {data: 'description', name: 'Mô tả'},
                 {data: 'is_active', name: 'Trạng thái'},
                 {data: 'action', name: 'Hành Động'}
@@ -255,7 +261,9 @@
 
                             //set dữ liệu
                             $('#name').val(menuDetail.name);
-                            $('#description').val(menuDetail.description);
+                            $('#description_menu').summernote('code', menuDetail.description)
+
+                            $('#intro').val(menuDetail.intro);
                             $('#image').attr('src', menuDetail.image_url);
                             $('#id').attr('value', menuDetail.id);
                             $('#action').attr('value', 'update');
@@ -273,7 +281,6 @@
                 var isActive = this.checked ? 1 : 0;
 
 
-                $("#is_active").val(isActive)
                 var url = '{{url("/karppi/admin/food-menu/active")}}';
                 Show_wait_announce
                 $.ajax({

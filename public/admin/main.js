@@ -225,18 +225,12 @@ $('.dateE').datetimepicker({
     format: 'L'
 });
 
-$('#description_vi').summernote()
-$('#description_en').summernote()
-$('#des_tab1_vi').summernote()
-$('#des_tab2_vi').summernote()
-$('#des_tab3_vi').summernote()
-$('#des_tab4_vi').summernote()
-$('#offer_vi').summernote()
-$('#des_tab1_en').summernote()
-$('#des_tab2_en').summernote()
-$('#des_tab3_en').summernote()
-$('#des_tab4_en').summernote()
-$('#offer_en').summernote()
+$('#description_menu').summernote({
+    height: 300,                 // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true                  // set focus to editable area after initializing summernote
+});
 
 // form repeater
 function repeaterFormat(classN){

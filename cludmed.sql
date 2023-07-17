@@ -79,23 +79,35 @@ INSERT INTO `food_category` (`id`, `name`, `description`, `image_url`, `is_delet
 -- Cấu trúc bảng cho bảng `food_menu`
 --
 
+# Dump of table food_menu
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `food_menu`;
+
 CREATE TABLE `food_menu` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `description` text,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `is_deleted` tinyint(11) DEFAULT '0',
-  `image_url` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+                             `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+                             `name` varchar(255) DEFAULT NULL,
+                             `intro` text DEFAULT NULL,
+                             `description` text DEFAULT NULL,
+                             `is_deleted` tinyint(11) DEFAULT 0,
+                             `image_url` varchar(255) DEFAULT NULL,
+                             `is_active` tinyint(4) DEFAULT 0,
+                             `created_at` datetime DEFAULT current_timestamp(),
+                             `updated_at` datetime DEFAULT current_timestamp(),
+                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Đang đổ dữ liệu cho bảng `food_menu`
---
+LOCK TABLES `food_menu` WRITE;
+/*!40000 ALTER TABLE `food_menu` DISABLE KEYS */;
 
-INSERT INTO `food_menu` (`id`, `name`, `description`, `is_active`, `is_deleted`, `image_url`, `created_at`, `updated_at`) VALUES
-(1, 'MENU NO.13', '“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD \n AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”', 1, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `food_menu` (`id`, `name`, `intro`, `description`, `is_deleted`, `image_url`, `is_active`, `created_at`, `updated_at`)
+VALUES
+    (1,'MENU NO.13',NULL,'“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD \r\n AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”\r\n\r\n- GUSTAV',0,'cloud30_2023-07-16-21.png',0,'0000-00-00 00:00:00','2023-07-17 13:24:18'),
+    (2,'Menu mua',NULL,'<p><span style=\"color: rgb(43, 34, 33); font-family: brother-1816; font-size: 18px; letter-spacing: 1.7472px; text-align: center; text-transform: uppercase; white-space-collapse: preserve; background-color: rgb(219, 218, 214);\">“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”</span></p>',0,'cloud30_2023-07-16-21.png',0,'2023-07-16 20:40:43','2023-07-17 13:24:18'),
+    (3,'Menu muaf xuan','THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH','<h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin-right: 0px; margin-bottom: 15px; margin-left: 0px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">KNUT BREAD BAKED FROM GUSTAV’S SOURDOUGH</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">The Knut bread is named after Gustav’s grandfather and refers to a hot dish following the original recipe. Knut believed that great bread (and moustaches) makes a man. This sourdough Knut reminds Gustav of childhood moments spent with his grandfather. Way back then, the table was always set with fresh bread and toasted butter, which was one of grandfather’s special culinary delights. This speciality was actually created by accident, as a saucepan with butter was left on the stove for a little too long. The same favourable forgetfulness runs in Gustav’s genes and is evident in his cuisine.</p><h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin: 2rem 0px 15px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">TO ACCOMPANY THE BREAD</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Wild garlic cream cheese (LF,GF)  5€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Feta spread (LF,GF) 6€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Chicken liver mousse and pear and port wine jam (LF,GF) 8€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Cold cuts from southern Europe (MF,GF) 11€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Selection of cheeses with compote of the day (GF)  11€</p>',0,'cloud14_2023-07-16-21.png',1,'2023-07-16 20:40:56','2023-07-17 13:24:18');
+
+/*!40000 ALTER TABLE `food_menu` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
