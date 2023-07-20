@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FoodCategory;
 use Illuminate\Http\Request;
 use App\Models\FoodMenu;
 use App\Models\Gallery;
@@ -41,10 +42,14 @@ class homeController extends Controller
         $currentMenu = FoodMenu::where('is_active',1)->first();
 
         // lấy danh mục thực đơn theo danh mục hiện tại
-        // $categoryByCurrentMenu = FoodCategory::
+        $categoryByCurrentMenu = FoodCategory::where('menu_id', $currentMenu->id ?? 0)->get();
 
 
-        return view('site.menu',compact('currentMenu','bannerMenu'));
+        return view('site.menu',compact(
+            'currentMenu',
+            'bannerMenu',
+            'categoryByCurrentMenu'
+        ));
     }
 
     public function gallery(Request $r)

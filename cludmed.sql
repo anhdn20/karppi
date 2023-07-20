@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th7 17, 2023 lúc 03:29 PM
+-- Thời gian đã tạo: Th7 20, 2023 lúc 03:44 PM
 -- Phiên bản máy phục vụ: 5.7.33
 -- Phiên bản PHP: 8.1.9
 
@@ -64,7 +64,7 @@ CREATE TABLE `food` (
   `category_id` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
-  `price` int(20) DEFAULT NULL,
+  `price` float DEFAULT NULL,
   `image_url` varchar(100) DEFAULT NULL,
   `is_deleted` tinyint(4) DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -76,10 +76,20 @@ CREATE TABLE `food` (
 --
 
 INSERT INTO `food` (`id`, `category_id`, `name`, `description`, `price`, `image_url`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 1, 'CURED WHITEFISH', 'Gustav highly values whitefish that graces stylishly with its flavour alone. Spiced up with radish and pickled mustard seeds, this silver-sided fish is served with a sauce prepared from fresh cucumber and jalapeño. It is based on a recipe acquired during a trip to Mexico, creating a perfect combination. Its flavour and encounter in the forests of Lapland is something Gustav will not easily forget. (LF, GF)', 16, NULL, 0, '2023-07-14 17:07:31', '2023-07-14 17:07:35'),
-(2, 1, 'GAZPACHO', 'Once enjoying the throaty rumble of his motorbike as he rode through Spain, Gustav’s heart is always warmed when hearting the word ‘gazpacho’. Gazpacho, the elixir of wayfarers and adventurers traversing dusty paths, embodies simplicity, purity, and sheer perfection on a scorching summer\'s day. In Gustav\'s summer menu, this chilled tomato and bell pepper soup is served with a side of cucumber and celery salad and chive sour cream dressing. Salud! (LF, GF)', 14, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 2, 'LEMON & PEA RISOTTO', 'This verdant risotto, gracing the summer menu, holds a cherished place among Gustav\'s culinary delights, transcending the constraints of time and location. It evokes vivid recollections of a journey through the sun-soaked landscapes of Calabria, Italy, where Gustav witnessed the enchantment of asparagus gracefully added to risotto, punctuated by a delicate sprinkle of hazelnuts. As a memento from that journey, he discovered that risotto epitomised an unpretentious yet precise culinary craft. (LF, GF, available as VEG)', 15, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 2, 'AUBERGINE', 'Our host finds inspiration in crafting a delectable vegetarian masterpiece, wherein the captivating aubergine claims the spotlight. As the grill is fired up, the rhythmic dance of culinary artistry begins, delicately adorning the plate with a touch of Japan\'s cherished gift, miso, accompanied by a tangy pickled salad and the luscious embrace of sesame-infused mayonnaise. (LF, GF available as VEG)', 15, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(15, 1, 'CURED WHITEFISH', 'Gustav highly values whitefish that graces stylishly with its flavour alone. Spiced up with radish and pickled mustard seeds, this silver-sided fish is served with a sauce prepared from fresh cucumber and jalapeño. It is based on a recipe acquired during a trip to Mexico, creating a perfect combination. Its flavour and encounter in the forests of Lapland is something Gustav will not easily forget.  (LF, GF)', 16, NULL, 0, '2023-07-20 22:32:14', '2023-07-20 22:32:14'),
+(16, 1, 'GAZPACHO', 'Once enjoying the throaty rumble of his motorbike as he rode through Spain, Gustav’s heart is always warmed when hearting the word ‘gazpacho’. Gazpacho, the elixir of wayfarers and adventurers traversing dusty paths, embodies simplicity, purity, and sheer perfection on a scorching summer\'s day. In Gustav\'s summer menu, this chilled tomato and bell pepper soup is served with a side of cucumber and celery salad and chive sour cream dressing. Salud!  (LF, GF)', 14, NULL, 0, '2023-07-20 22:33:20', '2023-07-20 22:33:20'),
+(17, 1, 'BURRATA', 'Gustav learnt how to prepare the mozzarella burrata on one of his many trips to Italy. This creamy and flavoursome delight is handsomely accompanied by capers, lovingly marinated fennel, a generous splash of olive oil, aioili, and a sun-kissed, grilled salad.   (LF,GF)', 15, NULL, 0, '2023-07-20 22:33:37', '2023-07-20 22:33:37'),
+(18, 1, 'STEAK TARTARE', 'When Gustav decided to enhance the classic tartare with perfectly tangy pickled pear, crunchy peanuts, and a touch of sweet chili, he was reminded once again why curiosity is the highest virtue of culinary art.  (LF,GF)', 16, NULL, 0, '2023-07-20 22:33:58', '2023-07-20 22:33:58'),
+(19, 6, 'LEMON & PEA RISOTTO', 'This verdant risotto, gracing the summer menu, holds a cherished place among Gustav\'s culinary delights, transcending the constraints of time and location. It evokes vivid recollections of a journey through the sun-soaked landscapes of Calabria, Italy, where Gustav witnessed the enchantment of asparagus gracefully added to risotto, punctuated by a delicate sprinkle of hazelnuts. As a memento from that journey, he discovered that risotto epitomised an unpretentious yet precise culinary craft.  (LF, GF, available as VEG)', 15, NULL, 0, '2023-07-20 22:34:41', '2023-07-20 22:34:41'),
+(20, 6, 'AUBERGINE', 'Our host finds inspiration in crafting a delectable vegetarian masterpiece, wherein the captivating aubergine claims the spotlight. As the grill is fired up, the rhythmic dance of culinary artistry begins, delicately adorning the plate with a touch of Japan\'s cherished gift, miso, accompanied by a tangy pickled salad and the luscious embrace of sesame-infused mayonnaise. (LF, GF available as VEG)', 15, NULL, 0, '2023-07-20 22:35:33', '2023-07-20 22:35:56'),
+(21, 6, 'PAN-FRIED PIKE-PERCH', 'Gustav holds the belief that this nourishing and delectable pan-fried pike-perch evokes a sense of enchantment, particularly on a warm summer’s day. As he hums away in the kitchen, Gustav gracefully adds new potatoes and asparagus into the culinary symphony. Gracefully enhancing the ensemble is a velvety hollandaise sauce infused with the essence of yuzu fruit.  (LF,GF)', 17, NULL, 0, '2023-07-20 22:35:50', '2023-07-20 22:36:00'),
+(22, 6, 'ENTRECÔTE', 'Grilling, like life itself, is a skill honed with care and mastery. Endowed with the wisdom bestowed by an Argentinian barbecue chef, Gustav gracefully assembles the pinnacle of summer’s meaty delight with meticulous devotion and boundless affection. The entrecôte is adorned with seasoned butter, accompanied by truffle-infused potatoes and grilled salad. Oh, what summertime splendor!  (LF, GF)', 32, NULL, 0, '2023-07-20 22:36:58', '2023-07-20 22:36:58'),
+(23, 4, 'PUFF PANCAKE', 'Gustav’s grandchildren’s favourite dessert ignites an exuberant whirlwind within the most cynical of dessert connoisseurs: Finnish puff pancake, prepared using the family’s treasured recipe, served with white chocolate, strawberry jelly, and rosemary-infused ice cream. The memories of triumphant fishing expeditions and the essence of summertime linger ever so close, awaiting to be relished with just a spoonful.  (LF,GF)', 10, NULL, 0, '2023-07-20 22:37:30', '2023-07-20 22:37:35'),
+(24, 4, 'RHUBARB PUDDING', 'Born from a spontaneous moment, on a sun-drenched summer\'s day, as Gustav’s neighbor shouted over the fence, offering a bundle of freshly plucked rhubarb, exclaiming, “Create something delightful from these!”. Embracing the invitation with fervour, our host swiftly embarked on the culinary quest, conjuring a luscious rhubarb pudding complemented by ginger granita alongside coconut ice cream. The neighbour loved it as well – enough to have a second helping.  (LF, GF)', 10, NULL, 0, '2023-07-20 22:37:51', '2023-07-20 22:37:51'),
+(25, 4, 'CHOCOLATE CAKE', 'This classic dessert has graced our tables since time immemorial. The chocolate cake, baked to perfection, is a velvety delight that ensures holistic satisfaction. While the cake could easily stand alone as a masterpiece on the plate, Gustav, driven by his perpetual quest for culinary excellence, crafts a luscious thick sauce of salty caramel, harmoniously paired with his homemade vanilla ice cream.  (LF, GF)', 10, NULL, 0, '2023-07-20 22:39:19', '2023-07-20 22:39:19'),
+(26, 10, 'FRIED FISH OF THE DAY', 'with french fries or potato puree', 3.9, NULL, 0, '2023-07-20 22:40:00', '2023-07-20 22:41:26'),
+(27, 10, 'MEATBALLS', 'with french fries or potato puree', 3.9, NULL, 0, '2023-07-20 22:40:25', '2023-07-20 22:41:21'),
+(28, 10, 'ICE CREAM', 'vanilla, rosemary or coconut', 3, NULL, 0, '2023-07-20 22:41:53', '2023-07-20 22:41:53');
 
 -- --------------------------------------------------------
 
@@ -91,6 +101,7 @@ CREATE TABLE `food_category` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(256) DEFAULT NULL,
   `description` text,
+  `menu_id` int(11) DEFAULT '0',
   `image_url` varchar(255) DEFAULT NULL,
   `is_deleted` tinyint(4) DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -101,9 +112,11 @@ CREATE TABLE `food_category` (
 -- Đang đổ dữ liệu cho bảng `food_category`
 --
 
-INSERT INTO `food_category` (`id`, `name`, `description`, `image_url`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 'COLD', '“Simple and delicious food made with good ingredients is something that is topical always and everywhere. This is one of the things I have learned on my journeys.”\n\n— Gustav', NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'HOT', '“My favourite recipe infatuates me over and over again! It reminds me of my once-in-a-lifetime experiences and the homely feeling of the rootlessness world traveller.”\n\n— Gustav\n', NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `food_category` (`id`, `name`, `description`, `menu_id`, `image_url`, `is_deleted`, `created_at`, `updated_at`) VALUES
+(1, 'COLD', '“Simple and delicious food made with good ingredients is something that is topical always and everywhere. This is one of the things I have learned on my journeys.”\r\n\r\n— Gustav', 3, NULL, 0, '2023-07-14 17:07:35', '2023-07-20 22:31:26'),
+(4, 'SWEET', '“Because a meal without dessert is like a grandfather without a moustache.”', 3, NULL, 0, '2023-07-16 13:31:23', '2023-07-20 22:31:17'),
+(6, 'HOT', '“My favourite recipe infatuates me over and over again! It reminds me of my once-in-a-lifetime experiences and the homely feeling of the rootlessness world traveller.”\r\n\r\n— Gustav', 3, NULL, 0, '2023-07-16 21:09:05', '2023-07-16 21:09:05'),
+(10, 'KIDS', 'Children’s menu is available only with a dining group', 3, NULL, 0, '2023-07-20 22:39:38', '2023-07-20 22:42:16');
 
 -- --------------------------------------------------------
 
@@ -128,23 +141,9 @@ CREATE TABLE `food_menu` (
 --
 
 INSERT INTO `food_menu` (`id`, `name`, `intro`, `description`, `is_deleted`, `image_url`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'MENU NO.13', NULL, '“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD \r\n AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”\r\n\r\n- GUSTAV', 0, 'cloud30_2023-07-16-21.png', 0, '0000-00-00 00:00:00', '2023-07-17 13:24:18'),
-(2, 'Menu mua', NULL, '<p><span style=\"color: rgb(43, 34, 33); font-family: brother-1816; font-size: 18px; letter-spacing: 1.7472px; text-align: center; text-transform: uppercase; white-space-collapse: preserve; background-color: rgb(219, 218, 214);\">“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”</span></p>', 0, 'cloud30_2023-07-16-21.png', 0, '2023-07-16 20:40:43', '2023-07-17 13:24:18'),
-(3, 'Menu muaf xuan', 'THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH', '<h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin-right: 0px; margin-bottom: 15px; margin-left: 0px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">KNUT BREAD BAKED FROM GUSTAV’S SOURDOUGH</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">The Knut bread is named after Gustav’s grandfather and refers to a hot dish following the original recipe. Knut believed that great bread (and moustaches) makes a man. This sourdough Knut reminds Gustav of childhood moments spent with his grandfather. Way back then, the table was always set with fresh bread and toasted butter, which was one of grandfather’s special culinary delights. This speciality was actually created by accident, as a saucepan with butter was left on the stove for a little too long. The same favourable forgetfulness runs in Gustav’s genes and is evident in his cuisine.</p><h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin: 2rem 0px 15px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">TO ACCOMPANY THE BREAD</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Wild garlic cream cheese (LF,GF)  5€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Feta spread (LF,GF) 6€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Chicken liver mousse and pear and port wine jam (LF,GF) 8€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Cold cuts from southern Europe (MF,GF) 11€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: &quot;ainslie sans condensed&quot;; line-height: 1.8em; font-style: italic; letter-spacing: 0.1em; overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">Selection of cheeses with compote of the day (GF)  11€</p>', 0, 'cloud14_2023-07-16-21.png', 1, '2023-07-16 20:40:56', '2023-07-17 13:24:18');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `food_menu_relation`
---
-
-CREATE TABLE `food_menu_relation` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `food_id` int(11) DEFAULT NULL,
-  `menu_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(1, 'MENU NO.14', 'THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH', '“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD \r\n AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”\r\n\r\n- GUSTAV', 0, 'cloud30_2023-07-16-21.png', 0, '2023-07-14 17:07:35', '2023-07-20 22:30:34'),
+(2, 'Menu mua', NULL, '<p style=\"text-align: left;\"><span style=\"color: rgb(43, 34, 33); font-family: Impact; font-size: 18px; letter-spacing: 1.7472px; text-align: center; text-transform: uppercase; white-space-collapse: preserve; background-color: rgb(219, 218, 214);\">“THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH.”</span><span style=\"font-family: Impact;\">﻿</span></p>', 0, 'cloud30_2023-07-16-21.png', 0, '2023-07-16 20:40:43', '2023-07-17 13:58:14'),
+(3, 'MENU NO.13', 'THERE’S VERY LITTLE DIFFERENCE BETWEEN CREATING FOOD AND ART. PERHAPS THIS IS WHY I LOVE THEM BOTH SO MUCH', '<h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin-right: 0px; margin-bottom: 15px; margin-left: 0px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">KNUT BREAD BAKED FROM GUSTAV’S SOURDOUGH</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: \" ainslie=\"\" sans=\"\" condensed\";=\"\" line-height:=\"\" 1.8em;=\"\" font-style:=\"\" italic;=\"\" letter-spacing:=\"\" 0.1em;=\"\" overflow-wrap:=\"\" break-word;=\"\" white-space-collapse:=\"\" preserve;=\"\" background-color:=\"\" rgb(219,=\"\" 218,=\"\" 214);=\"\" text-align:=\"\" center;\"=\"\">The Knut bread is named after Gustav’s grandfather and refers to a hot dish following the original recipe. Knut believed that great bread (and moustaches) makes a man. This sourdough Knut reminds Gustav of childhood moments spent with his grandfather. Way back then, the table was always set with fresh bread and toasted butter, which was one of grandfather’s special culinary delights. This speciality was actually created by accident, as a saucepan with butter was left on the stove for a little too long. The same favourable forgetfulness runs in Gustav’s genes and is evident in his cuisine.</p><h4 style=\"font-family: Agenda; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8em; font-size: 23px; margin: 2rem 0px 15px; color: rgb(43, 34, 33); overflow-wrap: break-word; white-space-collapse: preserve; background-color: rgb(219, 218, 214); text-align: center;\">TO ACCOMPANY THE BREAD</h4><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: \" ainslie=\"\" sans=\"\" condensed\";=\"\" line-height:=\"\" 1.8em;=\"\" font-style:=\"\" italic;=\"\" letter-spacing:=\"\" 0.1em;=\"\" overflow-wrap:=\"\" break-word;=\"\" white-space-collapse:=\"\" preserve;=\"\" background-color:=\"\" rgb(219,=\"\" 218,=\"\" 214);=\"\" text-align:=\"\" center;\"=\"\">Wild garlic cream cheese (LF,GF)  5€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: \" ainslie=\"\" sans=\"\" condensed\";=\"\" line-height:=\"\" 1.8em;=\"\" font-style:=\"\" italic;=\"\" letter-spacing:=\"\" 0.1em;=\"\" overflow-wrap:=\"\" break-word;=\"\" white-space-collapse:=\"\" preserve;=\"\" background-color:=\"\" rgb(219,=\"\" 218,=\"\" 214);=\"\" text-align:=\"\" center;\"=\"\">Feta spread (LF,GF) 6€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: \" ainslie=\"\" sans=\"\" condensed\";=\"\" line-height:=\"\" 1.8em;=\"\" font-style:=\"\" italic;=\"\" letter-spacing:=\"\" 0.1em;=\"\" overflow-wrap:=\"\" break-word;=\"\" white-space-collapse:=\"\" preserve;=\"\" background-color:=\"\" rgb(219,=\"\" 218,=\"\" 214);=\"\" text-align:=\"\" center;\"=\"\">Chicken liver mousse and pear and port wine jam (LF,GF) 8€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: \" ainslie=\"\" sans=\"\" condensed\";=\"\" line-height:=\"\" 1.8em;=\"\" font-style:=\"\" italic;=\"\" letter-spacing:=\"\" 0.1em;=\"\" overflow-wrap:=\"\" break-word;=\"\" white-space-collapse:=\"\" preserve;=\"\" background-color:=\"\" rgb(219,=\"\" 218,=\"\" 214);=\"\" text-align:=\"\" center;\"=\"\">Cold cuts from southern Europe (MF,GF) 11€</p><p class=\"sqsrte-small\" style=\"margin-top: 1rem; margin-right: 0px; margin-left: 0px; font-size: 15px; color: rgb(43, 34, 33); font-family: \" ainslie=\"\" sans=\"\" condensed\";=\"\" line-height:=\"\" 1.8em;=\"\" font-style:=\"\" italic;=\"\" letter-spacing:=\"\" 0.1em;=\"\" overflow-wrap:=\"\" break-word;=\"\" white-space-collapse:=\"\" preserve;=\"\" background-color:=\"\" rgb(219,=\"\" 218,=\"\" 214);=\"\" text-align:=\"\" center;\"=\"\">Selection of cheeses with compote of the day (GF)  11€</p>', 0, '1W4A0041_2023-07-20-21.jpg', 1, '2023-07-16 20:40:56', '2023-07-20 22:30:26');
 
 -- --------------------------------------------------------
 
@@ -281,6 +280,18 @@ ALTER TABLE `image`
 --
 ALTER TABLE `config`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `food`
+--
+ALTER TABLE `food`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT cho bảng `food_category`
+--
+ALTER TABLE `food_category`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `food_menu`

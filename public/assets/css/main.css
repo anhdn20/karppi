@@ -141,6 +141,10 @@ section.menuno13 span.owner{
     /* font-weight: 600; */
 }
 
+section.menuno13 .row{
+    justify-content: center;
+}
+
 section.banner{
     height: 700px;
     width: 100%;
@@ -205,6 +209,7 @@ section.menubycate .title_cate{
     letter-spacing: 10px;
     margin-bottom: 25px;
     margin-top: 15px;
+    text-transform: uppercase;
 }
 
 section.menubycate p, section.menubycate span {
@@ -448,6 +453,7 @@ section.about p {
         padding-bottom: 70px;
         min-height: 400px;
     }
+
     .welcome .top{
         margin-bottom: 50px;
     }

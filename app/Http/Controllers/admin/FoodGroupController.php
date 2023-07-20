@@ -60,6 +60,7 @@ class FoodGroupController extends Controller
                 'description' => $params['description'],
                 'menu_id' => $params['menu_id'] ?? 0
             ];
+
             if ($params['action'] == 'create') {
                 $result = FoodCategory::create($data);
             } else {

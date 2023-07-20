@@ -203,7 +203,8 @@
             // set action cho button
             $(document).on('click','#modalAddNew',async function (e){
                 $('#action').attr('value', 'create');
-
+                $('#food_category_id').val('').change();
+                $("#dataForm")[0].reset();
             })
 
             //load data edit

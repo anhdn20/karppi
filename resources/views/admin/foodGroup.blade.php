@@ -56,21 +56,6 @@
                                                         <textarea name="description" class="form-control input-desc" id="description" placeholder="Nhập mô tả"></textarea>
                                                     </div>
                                                 </div>
-
-{{--                                                <div class="card-body" id="formupimage">--}}
-{{--                                                    <label for="">Hình ảnh</label>--}}
-{{--                                                    <form action="{{url('/dropzone')}}" class="dropzone" id="image-upload" enctype="multipart/form-data">--}}
-{{--                                                        @csrf--}}
-{{--                                                        <div class="fallback">--}}
-{{--                                                            <input name="food_image" type="file" id="food_image" multiple>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="dz-message needsclick">--}}
-{{--                                                            <div class="mb-3"> <i class="display-4 text-muted uil uil-cloud-upload"></i> </div>--}}
-{{--                                                            <h4>Thả tệp vào đây hoặc nhấp để tải lên. (Chỉ khi cần thêm hoặc thay đổi)</h4>--}}
-{{--                                                        </div>--}}
-{{--                                                    </form>--}}
-{{--                                                </div>--}}
-
                                             </div>
                                         </div>
                                     </div>
@@ -157,8 +142,7 @@
                             // set dữ liệu tour
                             $('#name').val(detail.name);
                             $('#description').val(detail.description);
-                            $('#id').val(detail.id).change();
-                            $('#menu_id').val(food.menu_id).change();
+                            $('#food_category_id').val(detail.menu_id).change();
                             $('#id').attr('value', detail.id);
                             $('#action').attr('value', 'update');
                             show_success_announce(300);

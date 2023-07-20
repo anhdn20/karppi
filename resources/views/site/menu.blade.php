@@ -1,23 +1,22 @@
 @extends('site.layout')
 @section('content')
 
-@php
-    $image = asset('uploads/'.$bannerMenu->image??'');
-@endphp
-
-<style>
-    section.banner .banner::before{
-        background-image: url('<?php echo $image; ?>');
-    }
-</style>
-
 @if ($currentMenu != null)
+    @php
+        $image = asset('uploads/'.$currentMenu->image_url??'');
+    @endphp
+
+    <style>
+        section.banner .banner::before{
+            background-image: url('<?php echo $image; ?>');
+        }
+    </style>
     <section class="menuno13">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-8">
                     <h2>{{$currentMenu->name}}</h2>
-                    <p class="description">{!! html_entity_decode($currentMenu->description) !!}</p>
+                    <p class="description">{!! html_entity_decode($currentMenu->intro) !!}</p>
                     <span class="owner">- GUSTAV</span>
                 </div>
             </div>
@@ -34,7 +33,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-9 col-sm-12">
-                <h3>KNUT BREAD BAKED FROM GUSTAV’S SOURDOUGH</h3>
+                {!! html_entity_decode($currentMenu->description) !!}
+                {{-- <h3>KNUT BREAD BAKED FROM GUSTAV’S SOURDOUGH</h3>
                 <p class="desc">
                     The Knut bread is named after Gustav’s grandfather and refers to a hot dish following the original recipe. Knut believed that great bread (and moustaches) makes a man. This sourdough Knut reminds Gustav of childhood moments spent with his grandfather. Way back then, the table was always set with fresh bread and toasted butter, which was one of grandfather’s special culinary delights. This speciality was actually created by accident, as a saucepan with butter was left on the stove for a little too long. The same favourable forgetfulness runs in Gustav’s genes and is evident in his cuisine.
                 </p>
@@ -43,54 +43,64 @@
                 <p>Feta spread (LF,GF) 6€</p>
                 <p>Chicken liver mousse and pear and port wine jam (LF,GF) 8€</p>
                 <p>Cold cuts from southern Europe (MF,GF) 11€</p>
-                <p>Selection of cheeses with compote of the day (GF)  11€</p>
+                <p>Selection of cheeses with compote of the day (GF)  11€</p> --}}
             </div>
         </div>
     </div>
 </section>
 
-<section class="menubycate">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 col-md-9 col-sm-12">
-                <h3 class="title_cate">COLD</h3>
-                <p class="desc">
-                    “Simple and delicious food made with good ingredients is something that is topical always and everywhere. This is one of the things I have learned on my journeys.”
-                </p>
-                <span class="owner">— Gustav</span>
-                <div class="meal">
-                    <h3 class="title">CURED WHITEFISH</h3>
-                    <p>Gustav highly values whitefish that graces stylishly with its flavour alone. Spiced up with radish and pickled mustard seeds, this silver-sided fish is served with a sauce prepared from fresh cucumber and jalapeño. It is based on a recipe acquired during a trip to Mexico, creating a perfect combination. Its flavour and encounter in the forests of Lapland is something Gustav will not easily forget.  (LF, GF)</p>
-                    <span class="price">
-                        16 €
-                    </span>
-                </div>
-                <div class="meal">
-                    <h3 class="title">GAZPACHO</h3>
-                    <p>Once enjoying the throaty rumble of his motorbike as he rode through Spain, Gustav’s heart is always warmed when hearting the word ‘gazpacho’. Gazpacho, the elixir of wayfarers and adventurers traversing dusty paths, embodies simplicity, purity, and sheer perfection on a scorching summer's day. In Gustav's summer menu, this chilled tomato and bell pepper soup is served with a side of cucumber and celery salad and chive sour cream dressing. Salud!  (LF, GF)</p>
-                    <span class="price">
-                        14 €
-                    </span>
-                </div>
-                <div class="meal">
-                    <h3 class="title">BURRATA</h3>
-                    <p>Gustav learnt how to prepare the mozzarella burrata on one of his many trips to Italy. This creamy and flavoursome delight is handsomely accompanied by capers, lovingly marinated fennel, a generous splash of olive oil, aioili, and a sun-kissed, grilled salad.   (LF,GF)</p>
-                    <span class="price">
-                        15 €
-                    </span>
-                </div>
-                <div class="meal">
-                    <h3 class="title">STEAK TARTARE</h3>
-                    <p>When Gustav decided to enhance the classic tartare with perfectly tangy pickled pear, crunchy peanuts, and a touch of sweet chili, he was reminded once again why curiosity is the highest virtue of culinary art.  (LF,GF)</p>
-                    <span class="price">
-                        16 €
-                    </span>
+@foreach ($categoryByCurrentMenu as $item)
+    <section class="menubycate">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-9 col-sm-12">
+                    <h3 class="title_cate">{{$item->name}}</h3>
+                    <p class="desc">
+                        {{-- “Simple and delicious food made with good ingredients is something that is topical always and everywhere. This is one of the things I have learned on my journeys.” --}}
+                        {{$item->description}}
+                    </p>
+                    <span class="owner">— Gustav</span>
+                    {{-- load món ăn theo danh mục --}}
+                    @php
+                        $meals = \App\Models\Food::where('category_id',$item->id)->get();
+                    @endphp
+                    @foreach ($meals as $food)
+                        <div class="meal">
+                            <h3 class="title">{{$food->name}}</h3>
+                            <p>{{$food->description}}</p>
+                            <span class="price">
+                                {{$food->price}} €
+                            </span>
+                        </div>
+                    @endforeach
+                    {{-- <div class="meal">
+                        <h3 class="title">GAZPACHO</h3>
+                        <p>Once enjoying the throaty rumble of his motorbike as he rode through Spain, Gustav’s heart is always warmed when hearting the word ‘gazpacho’. Gazpacho, the elixir of wayfarers and adventurers traversing dusty paths, embodies simplicity, purity, and sheer perfection on a scorching summer's day. In Gustav's summer menu, this chilled tomato and bell pepper soup is served with a side of cucumber and celery salad and chive sour cream dressing. Salud!  (LF, GF)</p>
+                        <span class="price">
+                            14 €
+                        </span>
+                    </div>
+                    <div class="meal">
+                        <h3 class="title">BURRATA</h3>
+                        <p>Gustav learnt how to prepare the mozzarella burrata on one of his many trips to Italy. This creamy and flavoursome delight is handsomely accompanied by capers, lovingly marinated fennel, a generous splash of olive oil, aioili, and a sun-kissed, grilled salad.   (LF,GF)</p>
+                        <span class="price">
+                            15 €
+                        </span>
+                    </div>
+                    <div class="meal">
+                        <h3 class="title">STEAK TARTARE</h3>
+                        <p>When Gustav decided to enhance the classic tartare with perfectly tangy pickled pear, crunchy peanuts, and a touch of sweet chili, he was reminded once again why curiosity is the highest virtue of culinary art.  (LF,GF)</p>
+                        <span class="price">
+                            16 €
+                        </span>
+                    </div> --}}
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="menubycate">
+    </section>
+@endforeach
+
+{{-- <section class="menubycate">
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-9 col-sm-12">
@@ -198,7 +208,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 @endsection
 
