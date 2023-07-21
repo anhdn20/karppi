@@ -121,7 +121,7 @@ section.menuno13 h2{
     margin-bottom: 40px;
     color: var(--main-color);
 }
-section.menuno13 p.description{
+section.menuno13 p{
     font-family: brother;
     font-size: 18px;
     font-weight: 400;

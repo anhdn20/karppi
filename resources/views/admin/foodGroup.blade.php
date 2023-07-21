@@ -16,7 +16,7 @@
 
     <x-table :field="$field"></x-table>
 
-    <div class="modal fade" id="modal-lg">
+    <div class="modal fade blog" id="modal-lg">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 

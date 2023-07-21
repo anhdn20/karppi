@@ -225,41 +225,57 @@ $('.dateE').datetimepicker({
     format: 'L'
 });
 
-$('#description_menu').summernote({
+const objectS = {
     fontNames: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
     fontNamesIgnoreCheck: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
     height: 300,                 // set editor height
     minHeight: null,             // set minimum height of editor
     maxHeight: null,             // set maximum height of editor
-    focus: true                  // set focus to editable area after initializing summernote
-});
+    focus: true,                  // set focus to editable area after initializing summernote
+    toolbar: [
+      ['style', ['style','bold', 'italic', 'underline', 'clear']],
+      ['font', ['strikethrough', 'superscript', 'subscript','bold', 'underline', 'clear']],
+      ['fontname', ['fontname']],
+      ['fontsize', ['fontsize']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['height', ['height']],
+      ['insert', ['link', 'picture', 'video']],
+      ['view', ['fullscreen', 'codeview', 'help']],
+      ['table', ['table']],
+      ['letter', ['letter']]
+    ],
+    popover: {
+        image: [
+          ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+          ['float', ['floatLeft', 'floatRight', 'floatNone']],
+          ['remove', ['removeMedia']],
+          ['custom', ['imageAttributes','imageTitle']],
+        ],
+        link: [
+          ['link', ['linkDialogShow', 'unlink']]
+        ],
+        table: [
+          ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+          ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+        ],
+        air: [
+          ['color', ['color']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['para', ['ul', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture']]
+        ]
+    }
+  }
 
-$('#intro_menu').summernote({
-    fontNames: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
-    fontNamesIgnoreCheck: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
-    height: 300,                 // set editor height
-    minHeight: null,             // set minimum height of editor
-    maxHeight: null,             // set maximum height of editor
-    focus: true                  // set focus to editable area after initializing summernote
-});
+$('#description_menu').summernote(objectS);
 
-$('#description_group').summernote({
-    fontNames: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
-    fontNamesIgnoreCheck: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
-    height: 300,                 // set editor height
-    minHeight: null,             // set minimum height of editor
-    maxHeight: null,             // set maximum height of editor
-    focus: true                  // set focus to editable area after initializing summernote
-});
+$('#intro_menu').summernote(objectS);
 
-$('#description_food').summernote({
-    fontNames: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
-    fontNamesIgnoreCheck: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
-    height: 300,                 // set editor height
-    minHeight: null,             // set minimum height of editor
-    maxHeight: null,             // set maximum height of editor
-    focus: true                  // set focus to editable area after initializing summernote
-});
+$('#description_group').summernote(objectS);
+
+$('#description_food').summernote(objectS);
 
 
 

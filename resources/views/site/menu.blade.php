@@ -17,7 +17,7 @@
                 <div class="col-lg-8">
                     <h2>{{$currentMenu->name}}</h2>
                     <p class="description">{!! html_entity_decode($currentMenu->intro) !!}</p>
-                    <span class="owner">- GUSTAV</span>
+                    {{-- <span class="owner">- GUSTAV</span> --}}
                 </div>
             </div>
         </div>
