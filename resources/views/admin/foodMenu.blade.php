@@ -103,18 +103,11 @@
                                                     <input name="name" class="form-control" id="name" placeholder="Nhập tên thực đơn" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Hình ảnh</label>
-                                                    <div class="fixed-size-image-block">
-                                                        <img id='image' src="" alt="" />
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">Lời giới thiệu</label>
-                                                    <textarea name="intro" class="form-control" id="intro" placeholder="Nhập lời giới thiệu"></textarea>
+                                                    <textarea name="intro" class="form-control" id="intro_menu" placeholder="Nhập lời giới thiệu"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -263,8 +256,7 @@
                             $('#name').val(menuDetail.name);
                             $('#description_menu').summernote('code', menuDetail.description)
 
-                            $('#intro').val(menuDetail.intro);
-                            $('#image').attr('src', menuDetail.image_url);
+                            $('#intro_menu').summernote('code', menuDetail.intro);
                             $('#id').attr('value', menuDetail.id);
                             $('#action').attr('value', 'update');
 

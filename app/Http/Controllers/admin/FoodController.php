@@ -15,14 +15,14 @@ class FoodController extends Controller
         $foodModel = new Food();
         $foods = $foodModel->getList();
         return Datatables::of($foods)
-            ->editColumn('image_url', function ($row) {
-                $html = 'Không tìm thấy';
-                if(!empty($row->image_url)){
-                    $pathUpload = asset('uploads/').'/'.$row->image_url;
-                    $html = '<img src="'.$pathUpload.'" alt="'.$row->name.'" style="max-width:110px;">';
-                }
-                return $html;
-            })
+//            ->editColumn('image_url', function ($row) {
+//                $html = 'Không tìm thấy';
+//                if(!empty($row->image_url)){
+//                    $pathUpload = asset('uploads/').'/'.$row->image_url;
+//                    $html = '<img src="'.$pathUpload.'" alt="'.$row->name.'" style="max-width:110px;">';
+//                }
+//                return $html;
+//            })
             ->editColumn('category_name', function ($row) {
                 if (empty($row->category_name)) {
                     return '<span class="badge badge-secondary">Chưa chọn</span>';
@@ -42,7 +42,7 @@ class FoodController extends Controller
                             </div>
                        </td>';
             })
-            ->rawColumns(['action','category_name','image_url'])
+            ->rawColumns(['action','category_name','image_url', 'description'])
             ->make(true);
     }
     public function create(Request $r)

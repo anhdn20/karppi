@@ -24,7 +24,7 @@
     <x-headadmin title="Món ăn"></x-headadmin>
 
     @php
-        $field = ['TT','Hình ảnh' ,'Tên','Mô tả','Giá' ,'Nhóm' ,'#'];
+        $field = ['ID','Tên','Mô tả','Giá' ,'Nhóm' ,'#'];
     @endphp
 
     <x-table :field="$field"></x-table>
@@ -53,7 +53,7 @@
                                                         <input name="food_name" class="form-control" id="food_name" placeholder="Nhập tên món ăn" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Danh mục</label>
                                                         <select class="form-control select2" name="food_category_id" id="food_category_id" style="width: 100%;">
@@ -63,26 +63,19 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Giá</label>
                                                         <input name="price" type="number" class="form-control" value="0" id="price" placeholder="Nhập giá" />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="">Hình ảnh</label>
-                                                        <div class="fixed-size-image-block">
-                                                            <img id='image' src="" alt="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
+
 
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Mô tả</label>
-                                                        <textarea name="description" class="form-control" id="description" placeholder="Nhập mô tả"></textarea>
+                                                        <textarea name="description" class="form-control" id="description_food" placeholder="Nhập mô tả"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,8 +147,7 @@
         $(document).ready(function() {
             // tải dữ liệu lúc mới vào trang
             let DataLoadFirst = [
-                {data: 'id', name: 'Thứ tự'},
-                {data: 'image_url', name: 'Hình ảnh'},
+                {data: 'id', name: 'ID'},
                 {data: 'name', name: 'Tên'},
                 {data: 'description', name: 'Mô tả'},
                 {data: 'price', name: 'Giá'},
@@ -231,9 +223,9 @@
                             // set dữ liệu tour
                             $('#food_name').val(food.name);
                             $('#price').val(food.price);
-                            $('#description').val(food.description);
+                            $('#description_food').summernote('code', food.description);
+
                             $('#food_category_id').val(food.category_id).change();
-                            $('#image').attr('src', food.image_url);
                             $('#id').attr('value', food.id);
                             $('#action').attr('value', 'update');
                             show_success_announce(300);

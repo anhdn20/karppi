@@ -30,7 +30,7 @@ class FoodGroupController extends Controller
                             </div>
                        </td>';
             })
-            ->rawColumns(['action','category_name'])
+            ->rawColumns(['action','category_name', 'description'])
             ->make(true);
     }
     public function create(Request $r)

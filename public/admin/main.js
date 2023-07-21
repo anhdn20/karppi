@@ -220,10 +220,41 @@ function show_success_announce(time = 1000) {
 $('.select2').select2()
 
 
-$('#description_menu').summernote({
-    fontNames: ['brother'],
-    fontNamesIgnoreCheck: ['brother'],
+//Date picker
+$('.dateE').datetimepicker({
+    format: 'L'
+});
 
+$('#description_menu').summernote({
+    fontNames: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
+    fontNamesIgnoreCheck: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
+    height: 300,                 // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true                  // set focus to editable area after initializing summernote
+});
+
+$('#intro_menu').summernote({
+    fontNames: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
+    fontNamesIgnoreCheck: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
+    height: 300,                 // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true                  // set focus to editable area after initializing summernote
+});
+
+$('#description_group').summernote({
+    fontNames: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
+    fontNamesIgnoreCheck: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
+    height: 300,                 // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true                  // set focus to editable area after initializing summernote
+});
+
+$('#description_food').summernote({
+    fontNames: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
+    fontNamesIgnoreCheck: ['brother', 'brotherL', 'azote', 'ainslie', 'OskarBold'],
     height: 300,                 // set editor height
     minHeight: null,             // set minimum height of editor
     maxHeight: null,             // set maximum height of editor
@@ -231,4 +262,24 @@ $('#description_menu').summernote({
 });
 
 
+
+// form repeater
+function repeaterFormat(classN){
+    $('.'+classN+'').repeater({
+        show: function () {
+            $(this).slideDown();
+            $(this).find('select').next('.select2-container').remove();
+            $('.select2').select2();
+        },
+        hide: function (deleteElement) {
+            console.log(deleteElement,classN);
+            if (confirm('Are you sure you want to delete this element?')) {
+            $(this).slideUp(deleteElement);
+            }
+        }
+    });
+}
+// repeaterFormat('repeater-default1');
+// repeaterFormat('repeater-default2');
+// repeaterFormat('repeater-default3');
 
